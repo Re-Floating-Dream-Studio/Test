@@ -28,25 +28,52 @@
         body {
             font-family: 'MiSans', sans-serif;
             margin: 0;
+            background-color: #f9f9f9;
+            color: #333;
         }
 
         h1, h2, h3 {
             font-family: 'MiSans', sans-serif;
-            font-weight: bold; /* 使用粗体 */
+            font-weight: bold;
         }
 
         p {
             font-family: 'MiSans', sans-serif;
-            font-weight: normal; /* 使用正常字体 */
+            font-weight: normal;
         }
 
-        /* 其他样式保持不变 */
-        .nav-link {
-            text-decoration: none;
-            margin: 0 10px;
+        /* 顶栏样式 */
+        .top-bar {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            font-size: 14px;
+            width: 100%;
+            height: 60px;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
             display: flex;
             align-items: center;
-            color: inherit;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .top-bar h1 {
+            margin: 0;
+            color: white;
+            font-size: 24px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            margin: 0 15px;
+            display: flex;
+            align-items: center;
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #ffdd57;
         }
 
         .nav-link img {
@@ -54,45 +81,89 @@
             margin-right: 5px;
         }
 
+        /* 主界面样式 */
+        .main-content {
+            margin-top: 96px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-content img {
+            height: 300px;
+            margin-right: 50px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-content h2 {
+            margin: 0;
+            font-size: 60px;
+            color: #333;
+        }
+
+        .main-content p {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #666;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+        }
+
         .button {
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #ccc;
+            border: none;
             border-radius: 30px;
             width: 156px;
             height: 51px;
             margin-right: 20px;
-            background-color: #f0f0f0;
-            color: #333;
-            font-size: 22px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            font-size: 18px;
             text-decoration: none;
-            transition: background-color 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .button:hover {
-            background-color: #e0e0e0;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
 
         .button img {
-            height: 35px;
-            width: 35px;
+            height: 25px;
+            width: 25px;
             margin-right: 8px;
+        }
+
+        /* 卡片区域样式 */
+        .card-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
         }
 
         .card {
             border: none;
-            border-radius: 8px;
+            border-radius: 15px;
             padding: 20px;
             width: 220px;
             margin: 15px;
             text-align: left;
-            transition: background-color 0.3s;
+            background: white;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .card:hover {
-            background-color: rgba(204, 204, 204, 0.5);
-            cursor: pointer;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
         }
 
         .card img {
@@ -101,15 +172,66 @@
             margin-right: 8px;
             vertical-align: middle;
         }
+
+        .card h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .card p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #666;
+        }
+
+        /* 分割线样式 */
+        .divider {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .divider hr {
+            width: 66.67%;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+        }
+
+        /* 公告栏样式 */
+        .announcement {
+            text-align: left;
+            margin-left: 360px;
+            margin-top: 50px;
+        }
+
+        .announcement h2 {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .announcement p {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #666;
+        }
+
+        .announcement span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: #6a11cb;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
     </style>
 </head>
 
 <body>
     <!-- 顶栏色块 -->
-    <div style="background-color: #f0f0f0; font-size: 14px; width: 100%; height: 60px; box-sizing: border-box; position: fixed; top: 0; left: 0; display: flex; align-items: center;">
+    <div class="top-bar">
         <div style="display: flex; align-items: center; margin-left: 20px;">
-            <img src="logo.png" alt="Logo" style="height: 50px; margin-right: 10px;">
-            <h1 style="margin: 0;">Dreamirage Studio</h1>
+            <img src="logo.png" alt="Logo" style="height: 40px; margin-right: 10px;">
+            <h1>Dreamirage Studio</h1>
         </div>
 
         <!-- 按钮容器 -->
@@ -150,12 +272,12 @@
     </div>
 
     <!-- 主界面 -->
-    <div style="margin-top: 96px; display: flex; align-items: center; justify-content: center;">
-        <img src="big_logo.png" alt="Big Logo" style="height: 300px; margin-right: 50px;">
+    <div class="main-content">
+        <img src="big_logo.png" alt="Big Logo">
         <div style="text-align: left; margin-top: 20px;">
-            <h2 style="margin: 0; font-size: 60px;">Dreamirage Studio</h2>
-            <p style="margin: 10px 0;">高端的设计不需要高昂的价格</p>
-            <div style="margin-top: 10px; display: flex;">
+            <h2>Dreamirage Studio</h2>
+            <p>高端的设计不需要高昂的价格</p>
+            <div class="button-container">
                 <a href="index.html" class="button">
                     <img src="home.svg" alt="主页">主页
                 </a>
@@ -170,67 +292,67 @@
     </div>
 
     <!-- 分割线 -->
-    <div style="text-align: center; margin-top: 40px;">
-        <hr style="width: 66.67%; margin: 0 auto; border: 1px solid #ccc;">
+    <div class="divider">
+        <hr>
     </div>
 
     <!-- 卡片区域 -->
-    <div style="display: flex; justify-content: center; flex-wrap: wrap; margin-top: 40px;">
+    <div class="card-container">
         <!-- 卡片1 -->
         <div class="card">
             <a href="服务.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
                 <img src="services.svg" alt="服务">
-                <h3 style="margin: 0; font-size: 20px;">订购服务</h3>
+                <h3>订购服务</h3>
             </a>
-            <p style="margin: 5px 0; font-size: 16px;">哦你要设计啊，来叭，点击预定服务。</p>
+            <p>哦你要设计啊，来叭，点击预定服务。</p>
         </div>
 
         <!-- 卡片2 -->
         <div class="card">
             <a href="留言板.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
                 <img src="messageboard.svg" alt="留言板">
-                <h3 style="margin: 0; font-size: 20px;">留言板</h3>
+                <h3>留言板</h3>
             </a>
-            <p style="margin: 5px 0; font-size: 16px;">听说你有东西和我们说？来这留言叭~</p>
+            <p>听说你有东西和我们说？来这留言叭~</p>
         </div>
 
         <!-- 卡片3 -->
         <div class="card">
             <a href="赞助.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
                 <img src="donate.svg" alt="赞助">
-                <h3 style="margin: 0; font-size: 20px;">请杯奶茶呗</h3>
+                <h3>请杯奶茶呗</h3>
             </a>
-            <p style="margin: 5px 0; font-size: 16px;">学习一星期了，请我们喝杯奶茶叭，要补补脑子才可以继续设计哒。</p>
+            <p>学习一星期了，请我们喝杯奶茶叭，要补补脑子才可以继续设计哒。</p>
         </div>
 
         <!-- 卡片4 -->
         <div class="card">
             <a href="问题.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
                 <img src="question.svg" alt="问题">
-                <h3 style="margin: 0; font-size: 20px;">问题</h3>
+                <h3>问题</h3>
             </a>
-            <p style="margin: 5px 0; font-size: 16px;">你有什么疑问吗？这里解决哟~</p>
+            <p>你有什么疑问吗？这里解决哟~</p>
         </div>
     </div>
 
     <!-- 公告栏分割线 -->
-    <div style="text-align: center; margin-top: 40px;">
-        <hr style="width: 66.67%; margin: 0 auto; border: 1px solid #ccc;">
+    <div class="divider">
+        <hr>
     </div>
 
     <!-- 公告栏 -->
-    <div style="text-align: left; margin-left: 360px; margin-top: 50px;">
-        <h2 style="font-weight: bold;">公告栏</h2>
-        <p style="margin: 10px 0;">
-            <span style="display: inline-block; width: 10px; height: 10px; background-color: black; border-radius: 50%; margin-right: 5px;"></span>
+    <div class="announcement">
+        <h2>公告栏</h2>
+        <p>
+            <span></span>
             教师定制PPT享受9折优惠，定制公开课课件享受8折优惠。
         </p>
-        <p style="margin: 10px 0;">
-            <span style="display: inline-block; width: 10px; height: 10px; background-color: black; border-radius: 50%; margin-right: 5px;"></span>
+        <p>
+            <span></span>
             放假啦，全天接单哟，优先选择左边的客服妹妹哟
         </p>
-        <p style="margin: 10px 0;">
-            <span style="display: inline-block; width: 10px; height: 10px; background-color: black; border-radius: 50%; margin-right: 5px;"></span>
+        <p>
+            <span></span>
             目前网页还是纯前端，我们会快速完善的，敬请期待( •̀ ω •́ )✧
         </p>
     </div>
