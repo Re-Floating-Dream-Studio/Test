@@ -1,48 +1,239 @@
-<!-- 顶栏色块 -->
-<div style="background-color: #f0f0f0; font-size: 14px; width: 100%; height: 60px; box-sizing: border-box; position: fixed; top: 0; left: 0; display: flex; align-items: center;">
-    <div style="display: flex; align-items: center; margin-left: 20px;">
-        <img src="logo.png" alt="Logo" style="height: 40px; margin-right: 10px;"> <!-- Logo 图片 -->
-        <h1 style="margin: 0;">Drea M Irage STUDIO</h1>
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dreamirage - 主页</title>
+    <!-- 添加任务栏图标 -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <style>
+        /* 定义 MiSans 字体 */
+        @font-face {
+            font-family: 'MiSans';
+            src: url('fonts/MiSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'MiSans';
+            src: url('fonts/MiSans-Bold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        /* 全局字体设置 */
+        body {
+            font-family: 'MiSans', sans-serif;
+            margin: 0;
+        }
+
+        h1, h2, h3 {
+            font-family: 'MiSans', sans-serif;
+            font-weight: bold; /* 使用粗体 */
+        }
+
+        p {
+            font-family: 'MiSans', sans-serif;
+            font-weight: normal; /* 使用正常字体 */
+        }
+
+        /* 其他样式保持不变 */
+        .nav-link {
+            text-decoration: none;
+            margin: 0 10px;
+            display: flex;
+            align-items: center;
+            color: inherit;
+        }
+
+        .nav-link img {
+            height: 20px;
+            margin-right: 5px;
+        }
+
+        .button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ccc;
+            border-radius: 30px;
+            width: 156px;
+            height: 51px;
+            margin-right: 20px;
+            background-color: #f0f0f0;
+            color: #333;
+            font-size: 22px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .button img {
+            height: 35px;
+            width: 35px;
+            margin-right: 8px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 8px;
+            padding: 20px;
+            width: 220px;
+            margin: 15px;
+            text-align: left;
+            transition: background-color 0.3s;
+        }
+
+        .card:hover {
+            background-color: rgba(204, 204, 204, 0.5);
+            cursor: pointer;
+        }
+
+        .card img {
+            height: 25px;
+            width: 25px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 顶栏色块 -->
+    <div style="background-color: #f0f0f0; font-size: 14px; width: 100%; height: 60px; box-sizing: border-box; position: fixed; top: 0; left: 0; display: flex; align-items: center;">
+        <div style="display: flex; align-items: center; margin-left: 20px;">
+            <img src="logo.png" alt="Logo" style="height: 40px; margin-right: 10px;">
+            <h1 style="margin: 0;">Dreamirage STUDIO</h1>
+        </div>
+
+        <!-- 按钮容器 -->
+        <nav style="margin-left: 20px; display: flex; justify-content: center; flex: 1;">
+            <a href="index.html" class="nav-link">
+                <img src="home.svg" alt="主页">
+                主页
+            </a>
+            <a href="服务.html" class="nav-link">
+                <img src="services.svg" alt="服务">
+                服务
+            </a>
+            <a href="我们.html" class="nav-link">
+                <img src="about.svg" alt="我们">
+                我们
+            </a>
+            <a href="作品展示.html" class="nav-link">
+                <img src="portfolio.svg" alt="作品展示">
+                作品展示
+            </a>
+            <a href="价位表.html" class="nav-link">
+                <img src="pricing.svg" alt="价位表">
+                价位表
+            </a>
+            <a href="留言板.html" class="nav-link">
+                <img src="messageboard.svg" alt="留言板">
+                留言板
+            </a>
+            <a href="赞助.html" class="nav-link">
+                <img src="donate.svg" alt="赞助">
+                赞助
+            </a>
+            <a href="关于.html" class="nav-link">
+                <img src="aboutus.svg" alt="关于">
+                关于
+            </a>
+        </nav>
     </div>
 
-    <!-- 按钮容器 -->
-    <nav style="margin-left: 20px; display: flex; justify-content: center; flex: 1;">
-        <a href="index.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
-            <img src="home.svg" alt="主页">
-            主页
-        </a>
-        <a href="服务.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
-            <img src="services.svg" alt="服务">
-            服务
-        </a>
-        <a href="我们.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
-            <img src="about.svg" alt="我们">
-            我们
-        </a>
-        <a href="作品展示.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
-            <img src="portfolio.svg" alt="作品展示">
-            作品展示
-        </a>
-        <a href="价位表.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
-            <img src="pricing.svg" alt="价位表">
-            价位表
-        </a>
-        <a href="留言板.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
-            <img src="messageboard.svg" alt="留言板">
-            留言板
-        </a>
-        <a href="赞助.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
-            <img src="donate.svg" alt="赞助">
-            赞助
-        </a>
-        <a href="关于.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
-            <img src="aboutus.svg" alt="关于">
-            关于
-        </a>
-    </nav>
-</div>
+    <!-- 主界面 -->
+    <div style="margin-top: 96px; display: flex; align-items: center; justify-content: center;">
+        <img src="big_logo.png" alt="Big Logo" style="height: 250px; margin-right: 50px;">
+        <div style="text-align: left; margin-top: 20px;">
+            <h2 style="margin: 0; font-size: 60px;">Drea M Irage STUDIO</h2>
+            <p style="margin: 10px 0;">高端的设计不需要高昂的价格</p>
+            <div style="margin-top: 10px; display: flex;">
+                <a href="index.html" class="button">
+                    <img src="home.svg" alt="主页">主页
+                </a>
+                <a href="服务.html" class="button">
+                    <img src="services.svg" alt="服务">服务
+                </a>
+                <a href="我们.html" class="button">
+                    <img src="about.svg" alt="我们">我们
+                </a>
+            </div>
+        </div>
+    </div>
 
-<!-- 中间段落 -->
-<div style="margin-top: 60px; text-align: center; font-size: 16px; padding: 20px;">
-    <p>我们的网页目前还是纯前端，我们也在写着后端呢，请稍等哦，我们很快会完善功能的。</p>
-</div>
+    <!-- 分割线 -->
+    <div style="text-align: center; margin-top: 40px;">
+        <hr style="width: 66.67%; margin: 0 auto; border: 1px solid #ccc;">
+    </div>
+
+    <!-- 卡片区域 -->
+    <div style="display: flex; justify-content: center; flex-wrap: wrap; margin-top: 40px;">
+        <!-- 卡片1 -->
+        <div class="card">
+            <a href="服务.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                <img src="services.svg" alt="服务">
+                <h3 style="margin: 0; font-size: 20px;">订购服务</h3>
+            </a>
+            <p style="margin: 5px 0; font-size: 16px;">哦你要设计啊，来叭，点击预定服务。</p>
+        </div>
+
+        <!-- 卡片2 -->
+        <div class="card">
+            <a href="留言板.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                <img src="messageboard.svg" alt="留言板">
+                <h3 style="margin: 0; font-size: 20px;">留言板</h3>
+            </a>
+            <p style="margin: 5px 0; font-size: 16px;">听说你有东西和我们说？来这留言叭~</p>
+        </div>
+
+        <!-- 卡片3 -->
+        <div class="card">
+            <a href="赞助.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                <img src="donate.svg" alt="赞助">
+                <h3 style="margin: 0; font-size: 20px;">请杯奶茶呗</h3>
+            </a>
+            <p style="margin: 5px 0; font-size: 16px;">学习一星期了，请我们喝杯奶茶叭，要补补脑子才可以继续设计哒。</p>
+        </div>
+
+        <!-- 卡片4 -->
+        <div class="card">
+            <a href="问题.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                <img src="question.svg" alt="问题">
+                <h3 style="margin: 0; font-size: 20px;">问题</h3>
+            </a>
+            <p style="margin: 5px 0; font-size: 16px;">你有什么疑问吗？这里解决哟~</p>
+        </div>
+    </div>
+
+    <!-- 公告栏分割线 -->
+    <div style="text-align: center; margin-top: 40px;">
+        <hr style="width: 66.67%; margin: 0 auto; border: 1px solid #ccc;">
+    </div>
+
+    <!-- 公告栏 -->
+    <div style="text-align: left; margin-left: 360px; margin-top: 50px;">
+        <h2 style="font-weight: bold;">公告栏</h2>
+        <p style="margin: 10px 0;">
+            <span style="display: inline-block; width: 10px; height: 10px; background-color: black; border-radius: 50%; margin-right: 5px;"></span>
+            教师定制PPT享受9折优惠，定制公开课课件享受8折优惠。
+        </p>
+        <p style="margin: 10px 0;">
+            <span style="display: inline-block; width: 10px; height: 10px; background-color: black; border-radius: 50%; margin-right: 5px;"></span>
+            放假啦，全天接单哟，优先选择左边的客服妹妹哟
+        </p>
+        <p style="margin: 10px 0;">
+            <span style="display: inline-block; width: 10px; height: 10px; background-color: black; border-radius: 50%; margin-right: 5px;"></span>
+            目前网页还是纯前端，我们会快速完善的，敬请期待( •̀ ω •́ )✧
+        </p>
+    </div>
+</body>
+
+</html>
