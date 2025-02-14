@@ -1,0 +1,223 @@
+<!-- 顶栏色块 -->
+<div style="background-color: #f0f0f0; font-size: 14px; width: 100%; height: 60px; box-sizing: border-box; position: fixed; top: 0; left: 0; display: flex; align-items: center;">
+    <div style="display: flex; align-items: center; margin-left: 20px;">
+        <img src="logo.png" alt="Logo" style="height: 40px; margin-right: 10px;"> <!-- Logo 图片 -->
+        <h1 style="margin: 0;">Drea M Irage STUDIO</h1>
+    </div>
+
+    <!-- 按钮容器 -->
+    <nav style="margin-left: 20px; display: flex; justify-content: center; flex: 1;">
+        <a href="index.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
+            <img src="home.svg" alt="主页">
+            主页
+        </a>
+        <a href="服务.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
+            <img src="services.svg" alt="服务">
+            服务
+        </a>
+        <a href="我们.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
+            <img src="about.svg" alt="我们">
+            我们
+        </a>
+        <a href="作品展示.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
+            <img src="portfolio.svg" alt="作品展示">
+            作品展示
+        </a>
+        <a href="价位表.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
+            <img src="pricing.svg" alt="价位表">
+            价位表
+        </a>
+        <a href="留言板.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
+            <img src="messageboard.svg" alt="留言板">
+            留言板
+        </a>
+        <a href="赞助.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
+            <img src="donate.svg" alt="赞助">
+            赞助
+        </a>
+        <a href="关于.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
+            <img src="aboutus.svg" alt="关于">
+            关于
+        </a>
+    </nav>
+</div>
+
+<!-- 正文 -->
+<div style="margin-top: 65px; padding: 20px; text-align: center;">
+    <p style="font-size: 18px;">你知道嘛，Drea M Irage STUDIO其实是由两个工作室组成的哦，它们分别是Dream Studio和Mirage Studio~</p>
+    <hr style="border: 1px solid #f0f0f0; width: 66.67%; margin: 20px auto;">
+
+    <!-- 卡片容器 -->
+    <div style="display: flex; justify-content: space-between; width: 66.67%; margin: 20px auto;">
+        <div style="flex: 1; background-color: #ffffff; border-radius: 10px; padding: 40px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); text-align: center; margin-right: 10px;">
+            <img src="Dream Studio LOGO.png" alt="Dream Studio LOGO" style="max-width: 35%; height: auto;"> <!-- 左边LOGO -->
+
+            <!-- 管理员标题 -->
+            <h2 style="margin-top: 20px; text-align: left;">管理员</h2>
+
+            <!-- 管理员卡片 -->
+            <div class="card" style="width: 100%; margin-top: 10px;" onmouseover="toggleDrawer('drawer1', true)" onmouseout="toggleDrawer('drawer1', false)">
+                <div style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); display: flex; align-items: center; padding: 10px; height: 80px;">
+                    <img src="Atech1.png" alt="头像" style="width: 15%; height: auto; border-radius: 50%;">
+                    <div style="margin-left: 10px; text-align: left;">
+                        <p style="font-weight: bold; margin: 0;">Afly-dream</p>
+                        <p style="margin: 0;">一只有梦想的猫</p>
+                    </div>
+                </div>
+                <div id="drawer1" class="drawer" style="display: none; padding: 10px; background-color: #fafafa; border-radius: 10px; margin-top: 10px;">
+                    <a href="https://space.bilibili.com/1364066451?spm_id_from=333.999.0.0" target="_blank" style="display: block; margin-bottom: 5px; color: black; text-decoration: none;">我的B站</a>
+                    <p style="margin: 0;">UID 1364066451</p>
+                    <p style="margin: 0;">VX：dreamof_2012</p>
+                </div>
+            </div>
+
+            <!-- 技术员标题 -->
+            <h2 style="margin-top: 10px; text-align: left;">技术员</h2>
+
+            <!-- 技术员卡片 -->
+            <div class="card" style="width: 100%; margin-top: 10px;" onmouseover="toggleDrawer('drawer2', true)" onmouseout="toggleDrawer('drawer2', false)">
+                <div style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); display: flex; align-items: center; padding: 10px; height: 80px;">
+                    <img src="boss.png" alt="技术员1" style="width: 15%; height: auto; border-radius: 50%;">
+                    <div style="margin-left: 10px; text-align: left;">
+                        <p style="font-weight: bold; margin: 0;">HandiCMD</p>
+                        <p style="margin: 0;">懒得写~~</p>
+                    </div>
+                </div>
+                <div id="drawer2" class="drawer" style="display: none; padding: 10px; background-color: #fafafa; border-radius: 10px; margin-top: 10px;">
+                    <a href="https://space.bilibili.com/1399596719?spm_id_from=333.999.0.0" target="_blank" style="display: block; margin-bottom: 5px; color: black; text-decoration: none;">我的B站</a>
+                    <p style="margin: 0;">UID 1399596719</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="flex: 1; background-color: #ffffff; border-radius: 10px; padding: 40px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); text-align: center; margin-left: 10px;">
+            <img src="Mirage Studio LOGO.png" alt="Mirage Studio LOGO" style="max-width: 35%; height: auto;"> <!-- 右边LOGO -->
+
+            <!-- 管理员标题 -->
+            <h2 style="margin-top: 20px; text-align: left;">管理员</h2>
+
+            <!-- 管理员小卡片 -->
+            <div class="card" style="width: 100%; margin-top: 10px;" onmouseover="toggleDrawer('drawer3', true)" onmouseout="toggleDrawer('drawer3', false)">
+                <div style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); display: flex; align-items: center; padding: 10px; height: 80px;">
+                    <img src="mirageBINtx.png" alt="头像" style="width: 15%; height: auto; border-radius: 50%;">
+                    <div style="margin-left: 10px; text-align: left;">
+                        <p style="font-weight: bold; margin: 0;">mirage彬</p>
+                        <p style="margin: 0;">我以青春为笔名，只是墨色淡了，未能写出未来可期。</p>
+                    </div>
+                </div>
+                <div id="drawer3" class="drawer" style="display: none; padding: 10px; background-color: #fafafa; border-radius: 10px; margin-top: 10px;">
+                    <a href="https://space.bilibili.com/3546558473702169" target="_blank" style="display: block; margin-bottom: 5px; color: black; text-decoration: none;">我的B站</a>
+                    <p style="margin: 0;">UID 3546558473702169</p>
+                    <p style="margin: 0;">VX：LYiFan2010</p>
+                    <p style="margin: 0;">冈易-mail：pythonlhbjave2022@163.com</p>
+                    <p style="margin: 0;">Gmail：lhblovehyt@gmail.com</p>
+                </div>
+            </div>
+
+            <!-- 技术员标题 -->
+            <h2 style="margin-top: 10px; text-align: left;">技术员</h2>
+
+            <!-- 技术员小卡片 -->
+            <div style="display: flex; flex-wrap: wrap; justify-content: flex-start; width: 100%; margin-top: 10px;">
+                <div class="card" style="width: 100%; margin-top: 10px;" onmouseover="toggleDrawer('drawer4', true)" onmouseout="toggleDrawer('drawer4', false)">
+                    <div style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); display: flex; align-items: center; padding: 10px; height: 80px;">
+                        <img src="tech1.png" alt="技术员1" style="width: 15%; height: auto; border-radius: 50%;">
+                        <div style="margin-left: 10px; text-align: left;">
+                            <p style="font-weight: bold; margin: 0;">Galaxia坤</p>
+                            <p style="margin: 0;">想要的也许在星期八.</p>
+                        </div>
+                    </div>
+                    <div id="drawer4" class="drawer" style="display: none; padding: 10px; background-color: #fafafa; border-radius: 10px; margin-top: 10px;">
+                        <a href="https://space.bilibili.com/3546723041413449?spm_id_from=333.999.0.0" target="_blank" style="display: block; margin-bottom: 5px; color: black; text-decoration: none;">我的B站</a>
+                        <p style="margin: 0;">UID 3546723041413449</p>
+                        <p style="margin: 0;">VX：Kunheng-Liu</p>
+                    </div>
+                </div>
+
+                <div class="card" style="width: 100%; margin-top: 10px;" onmouseover="toggleDrawer('drawer5', true)" onmouseout="toggleDrawer('drawer5', false)">
+                    <div style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); display: flex; align-items: center; padding: 10px; height: 80px;">
+                        <img src="tech2.png" alt="技术员2" style="width: 15%; height: auto; border-radius: 50%;">
+                        <div style="margin-left: 10px; text-align: left;">
+                            <p style="font-weight: bold; margin: 0;">Radiant俊</p>
+                            <p style="margin: 0;">TA还没写简介哦~</p>
+                        </div>
+                    </div>
+                    <div id="drawer5" class="drawer" style="display: none; padding: 10px; background-color: #fafafa; border-radius: 10px; margin-top: 10px;">
+                        <a href="https://space.bilibili.com/3546722135444085?spm_id_from=333.337.0.0" target="_blank" style="display: block; margin-bottom: 5px; color: black; text-decoration: none;">我的B站</a>
+                        <p style="margin: 0;">UID 3546722135444085</p>
+                        <p style="margin: 0;">VX：W262312082899</p>
+                    </div>
+                </div>
+
+                <div class="card" style="width: 100%; margin-top: 10px;" onmouseover="toggleDrawer('drawer6', true)" onmouseout="toggleDrawer('drawer6', false)">
+                    <div style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); display: flex; align-items: center; padding: 10px; height: 80px;">
+                        <img src="tech3.png" alt="技术员3" style="width: 15%; height: auto; border-radius: 50%;">
+                        <div style="margin-left: 10px; text-align: left;">
+                            <p style="font-weight: bold; margin: 0;">梧(win)</p>
+                            <p style="margin: 0;">TA还没写简介哦~</p>
+                        </div>
+                    </div>
+                    <div id="drawer6" class="drawer" style="display: none; padding: 10px; background-color: #fafafa; border-radius: 10px; margin-top: 10px;">
+                        <p style="margin: 0;">暂无~</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 后勤人员标题 -->
+            <h2 style="margin-top: 10px; text-align: left;">后勤人员</h2>
+
+            <!-- 后勤人员小卡片 -->
+            <div style="display: flex; flex-wrap: wrap; justify-content: flex-start; width: 100%; margin-top: 10px;">
+                <div class="card" style="width: 100%; margin-top: 10px;" onmouseover="toggleDrawer('drawer7', true)" onmouseout="toggleDrawer('drawer7', false)">
+                    <div style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); display: flex; align-items: center; padding: 10px; height: 80px;">
+                        <img src="logistics1.png" alt="后勤人员1" style="width: 15%; height: auto; border-radius: 50%;">
+                        <div style="margin-left: 10px; text-align: left;">
+                            <p style="font-weight: bold; margin: 0;">sensitive怡</p>
+                            <p style="margin: 0;">✩ ✧*̣̩⋆̩☽⋆ɢᴏᴏᴅɴɪɢʜᴛ ☾ ☁️‴ ☽⋆゜</p>
+                        </div>
+                    </div>
+                    <div id="drawer7" class="drawer" style="display: none; padding: 10px; background-color: #fafafa; border-radius: 10px; margin-top: 10px;">
+                        <a href="https://space.bilibili.com/3546785878378593?spm_id_from=333.999.0.0" target="_blank" style="display: block; margin-bottom: 5px; color: black; text-decoration: none;">我的B站</a>
+                        <p style="margin: 0;">UID 3546785878378593</p>
+                    </div>
+                </div>
+
+                <div class="card" style="width: 100%; margin-top: 10px;" onmouseover="toggleDrawer('drawer8', true)" onmouseout="toggleDrawer('drawer8', false)">
+                    <div style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); display: flex; align-items: center; padding: 10px; height: 80px;">
+                        <img src="logistics2.png" alt="后勤人员2" style="width: 15%; height: auto; border-radius: 50%;">
+                        <div style="margin-left: 10px; text-align: left;">
+                            <p style="font-weight: bold; margin: 0;">小y.</p>
+                            <p style="margin: 0;">你的故事</p>
+                        </div>
+                    </div>
+                    <div id="drawer8" class="drawer" style="display: none; padding: 10px; background-color: #fafafa; border-radius: 10px; margin-top: 10px;">
+                        <p style="margin: 0;">VX：Tzxy127</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleDrawer(drawerId, show) {
+        const drawer = document.getElementById(drawerId);
+        if (show) {
+            drawer.style.display = "block";
+            drawer.animate(
+                [
+                    { transform: 'translateY(-10px)', opacity: 0 }, 
+                    { transform: 'translateY(0)', opacity: 1 }
+                ], 
+                {
+                    duration: 300,
+                    easing: 'ease-out',
+                    fill: 'forwards'
+                }
+            );
+        } else {
+            drawer.style.display = "none";
+        }
+    }
+</script>

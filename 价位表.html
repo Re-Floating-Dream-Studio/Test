@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drea M Irage STUDIO</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* 让body的高度充满可视区域 */
+        }
+
+        /* 顶栏样式 */
+        .navbar {
+            background-color: #f0f0f0;
+            font-size: 14px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .navbar img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar h1 {
+            margin: 0;
+        }
+
+        /* 正文内容 */
+        .content {
+            flex: 1; /* 自适应占据剩余空间 */
+            padding: 20px;
+            margin-top: 60px; /* 留出顶部导航栏的空间 */
+            overflow-y: auto; /* 只有内容超出时才滚动 */
+        }
+
+        h1, h2, h3 {
+            color: #4A4A4A;
+        }
+
+        h1 {
+            font-size: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            margin-left: 166px;
+        }
+
+        .service-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            text-align: left;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative; /* 为文本定位做准备 */
+        }
+
+        .service-card h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .service-card p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .price-card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 5px;
+            width: 120px;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+
+        .divider {
+            border-top: 1px solid #ccc;
+            margin: 40px 0;
+        }
+
+        /* 模态卡片样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 70px; /* 这里调节模态窗口与顶部之间的距离 */
+            left: 0;
+            width: 100%;
+            height: calc(100% - 70px); /* 确保模态窗高为可视区域减去导航栏的高度 */
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 700px;
+        }
+
+        .close {
+            cursor: pointer;
+            float: right;
+            font-size: 18px;
+            color: #666;
+        }
+
+        .indicator {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: blue;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 顶栏色块 -->
+<div style="background-color: #f0f0f0; font-size: 14px; width: 100%; height: 60px; box-sizing: border-box; position: fixed; top: 0; left: 0; display: flex; align-items: center;">
+    <div style="display: flex; align-items: center; margin-left: 20px;">
+        <img src="logo.png" alt="Logo" style="height: 40px; margin-right: 10px;"> <!-- Logo 图片 -->
+        <h1 style="margin: 0;">Drea M Irage STUDIO</h1>
+    </div>
+
+    <!-- 按钮容器 -->
+    <nav style="margin-left: 20px; display: flex; justify-content: center; flex: 1;">
+        <a href="index.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
+            <img src="home.svg" alt="主页">
+            index
+        </a>
+        <a href="服务.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
+            <img src="services.svg" alt="服务">
+            服务
+        </a>
+        <a href="我们.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
+            <img src="about.svg" alt="我们">
+            我们
+        </a>
+        <a href="作品展示.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
+            <img src="portfolio.svg" alt="作品展示">
+            作品展示
+        </a>
+        <a href="价位表.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
+            <img src="pricing.svg" alt="价位表">
+            价位表
+        </a>
+        <a href="留言板.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
+            <img src="messageboard.svg" alt="留言板">
+            留言板
+        </a>
+        <a href="赞助.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
+            <img src="donate.svg" alt="赞助">
+            赞助
+        </a>
+        <a href="关于.html" class="nav-link" style="text-decoration: none; color: inherit; margin: 0 10px; display: flex; align-items: center;">
+            <img src="aboutus.svg" alt="关于">
+            关于
+        </a>
+    </nav>
+</div>
+
+<!-- 正文内容 -->
+<div class="content">
+    <h1>办公代做</h1>
+
+    <h2>PowerPoint</h2>
+    <div class="service-card">
+        <h3>PowerPoint代做</h3>
+        <p>专业团队为您制作高质量的PPT</p>
+        <div style="display: flex; flex-wrap: wrap;">
+            <div class="price-card"><div>基础</div><div>3 RMB/页</div></div>
+            <div class="price-card"><div>普通</div><div>5 RMB/页</div></div>
+            <div class="price-card"><div>精美</div><div>10 RMB/页</div></div>
+            <div class="price-card"><div>高端</div><div>价格面议</div></div>
+            <div class="price-card"><div>紧急</div><div>加2.5 RMB/页</div></div>
+        </div>
+        <div class="indicator" onclick="showModal()">就它了→</div>
+    </div>
+
+    <div class="service-card">
+        <h3>PowerPoint美化</h3>
+        <p>将您的PPT进行专业美化，提升视觉效果</p>
+        <div style="display: flex; flex-wrap: wrap;">
+            <div class="price-card"><div>基础</div><div>3 RMB/页</div></div>
+            <div class="price-card"><div>普通</div><div>5 RMB/页</div></div>
+            <div class="price-card"><div>精美</div><div>10 RMB/页</div></div>
+            <div class="price-card"><div>高端</div><div>价格面议</div></div>
+            <div class="price-card"><div>紧急</div><div>加2.5 RMB/页</div></div>
+        </div>
+        <div class="indicator" onclick="showModal()">就它了→</div>
+    </div>
+
+    <h2>Word</h2>
+    <div class="service-card">
+        <h3>Word代做</h3>
+        <p>专业团队为您完成高质量的Word文档</p>
+        <div class="price-card"><div>0.2 RMB/字</div></div>
+        <div class="indicator" onclick="showModal()">就它了→</div>
+    </div>
+
+    <div class="service-card">
+        <h3>Word美化</h3>
+        <p>让您的Word文档更具吸引力和专业性！</p>
+        <div class="price-card"><div>0.05 RMB/字（全文）</div></div>
+        <div class="indicator" onclick="showModal()">就它了→</div>
+    </div>
+
+    <h2>Excel</h2>
+    <div class="service-card">
+        <h3>Excel代做</h3>
+        <p>专业团队为您列出高质量的Excel文档</p>
+        <div class="price-card"><div>0.5 RMB/格</div></div>
+        <div class="indicator" onclick="showModal()">就它了→</div>
+    </div>
+
+    <div class="service-card">
+        <h3>Excel美化</h3>
+        <p>让您的Excel文档更加整洁和直观！</p>
+        <div class="price-card"><div>0.1 RMB/格（全表）</div></div>
+        <div class="indicator" onclick="showModal()">就它了→</div>
+    </div>
+
+    <h2>简历</h2>
+    <div class="service-card">
+        <h3>简历代做</h3>
+        <p>给你一个交出去让人刮目相看的简历</p>
+        <div style="display: flex; flex-wrap: wrap;">
+            <div class="price-card"><div>基础</div><div>50 RMB</div></div>
+            <div class="price-card"><div>普通</div><div>100 RMB</div></div>
+            <div class="price-card"><div>精美</div><div>200 RMB</div></div>
+        </div>
+        <div class="indicator" onclick="showModal()">就它了→</div>
+    </div>
+
+    <div class="service-card">
+        <h3>简历美化</h3>
+        <p>让您的简历更让人喜欢！</p>
+        <div style="display: flex; flex-wrap: wrap;">
+            <div class="price-card"><div>基础</div><div>20 RMB/页</div></div>
+            <div class="price-card"><div>普通</div><div>60 RMB/页</div></div>
+            <div class="price-card"><div>精美</div><div>80 RMB/页</div></div>
+        </div>
+        <div class="indicator" onclick="showModal()">就它了→</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h1>平面设计</h1>
+    
+    <h2>logo设计</h2>
+    <div class="service-card">
+        <h3>logo设计</h3>
+        <p>一个好看的logo可以加好多分哦~</p>
+        <div style="display: flex; flex-wrap: wrap;">
+            <div class="price-card"><div>基础</div><div>200~300 RMB</div></div>
+            <div class="price-card"><div>普通</div><div>3000~10000 RMB</div></div>
+            <div class="price-card"><div>精美</div><div>&gt; 10000 RMB</div></div>
+        </div>
+        <div class="indicator" onclick="showModal()">就它了→</div>
+    </div>
+
+    <h2>UI设计</h2>
+    <div class="service-card">
+        <h3>UI设计</h3>
+        <p>给你让用户喜欢的界面</p>
+        <div style="display: flex; flex-wrap: wrap;">
+            <div class="price-card"><div>基础</div><div>100 RMB/页</div></div>
+            <div class="price-card"><div>普通</div><div>400 RMB/页</div></div>
+            <div class="price-card"><div>精美</div><div>800 RMB/页</div></div>
+        </div>
+        <div class="indicator" onclick="showModal()">就它了→</div>
+    </div>
+
+    <h2>海报</h2>
+    <div class="service-card">
+        <h3>海报设计</h3>
+        <p>设计出留住用户的海报</p>
+        <div style="display: flex; flex-wrap: wrap;">
+            <div class="price-card"><div>基础</div><div>500 RMB/页</div></div>
+            <div class="price-card"><div>普通</div><div>1000 RMB/页</div></div>
+            <div class="price-card"><div>精美</div><div>5000 RMB/页</div></div>
+            <div class="price-card"><div>高端</div><div>价格依据项目的复杂性和特定需求而定</div></div>
+            <div class="price-card"><div>紧急</div><div>以上所选套餐加100 RMB</div></div>
+        </div>
+        <div class="indicator" onclick="showModal()">就它了→</div>
+    </div>
+
+    <h2>前端</h2>
+    <div class="service-card">
+        <h3>前端设计</h3>
+        <p>设计出好看干净的网页</p>
+        <div style="display: flex; flex-wrap: wrap;">
+            <div class="price-card"><div>基础</div><div>100 RMB/页</div></div>
+            <div class="price-card"><div>普通</div><div>400 RMB/页</div></div>
+            <div class="price-card"><div>精美</div><div>800 RMB/页</div></div>
+        </div>
+        <div class="indicator" onclick="showModal()">就它了→</div>
+    </div>
+
+    <div class="service-card">
+        <h3>前端代做</h3>
+        <p>不会做网页？我们可以做出精美的网页给你！</p>
+        <div style="display: flex; flex-wrap: wrap;">
+            <div class="price-card"><div>基础</div><div>150 RMB/页</div></div>
+            <div class="price-card"><div>普通</div><div>300 RMB/页</div></div>
+            <div class="price-card"><div>精美</div><div>800 RMB/页</div></div>
+        </div>
+        <div class="indicator" onclick="showModal()">就它了→</div>
+    </div>
+
+    <div class="service-card">
+        <h3>前端美化</h3>
+        <p>前端不够好看？我们可以帮你改！</p>
+        <div style="display: flex; flex-wrap: wrap;">
+            <div class="price-card"><div>基础</div><div>50 RMB/页</div></div>
+            <div class="price-card"><div>普通</div><div>200 RMB/页</div></div>
+            <div class="price-card"><div>精美</div><div>400 RMB/页</div></div>
+        </div>
+        <div class="indicator" onclick="showModal()">就它了→</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h1>杂项</h1>
+    
+    <h2>视频剪辑</h2>
+    <div class="service-card">
+        <h3>视频剪辑</h3>
+        <p>火爆的视频不会剪？找不到模板？我们可以帮你剪辑！</p>
+        <div class="price-card"><div>剪辑</div><div>依据项目的复杂性和特定需求而定</div></div>
+        <div class="indicator" onclick="showModal()">就它了→</div>
+    </div>
+    
+    <h2>图片处理</h2>
+    <div class="service-card">
+        <h3>图片处理</h3>
+        <p>丑图？水印？抠图？我们帮你处理！</p>
+        <div style="display: flex; flex-wrap: wrap;">
+            <div class="price-card"><div>抠图</div><div>25 RMB/张</div></div>
+            <div class="price-card"><div>去水印</div><div>10 RMB/张</div></div>
+            <div class="price-card"><div>调色</div><div>30 RMB/张</div></div>
+        </div>
+        <div class="indicator" onclick="showModal()">就它了→</div>
+    </div>
+    
+    <h2>论文代写</h2>
+    <div class="service-card">
+        <h3>论文代写</h3>
+        <p>论文实在不会写？我们可以代写！</p>
+        <div class="price-card"><div>论文代写</div><div>0.5 RMB/字</div></div>
+        <div class="indicator" onclick="showModal()">就它了→</div>
+    </div>
+
+    <h2>外语翻译</h2>
+    <div class="service-card">
+        <h3>外语翻译</h3>
+        <p>英文文档要翻译？我们帮你翻译！</p>
+        <div class="price-card"><div>外语翻译</div><div>0.8 RMB/字</div></div>
+        <div class="indicator" onclick="showModal()">就它了→</div>
+    </div>
+
+    <div class="divider"></div>
+</div>
+
+<!-- 模态卡片 -->
+<div class="modal" id="myModal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation();">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3>对不起啊，我们忙着开发和学习暂时省略了这个功能 `(*>﹏<*)′</h3>
+        <p>实在麻烦您只能手动添加客服妹妹微信了，放心吧，正在完善呢，敬请期待吧 ( •̀ ω •́ )✧ 扫描下面二维码添加客服妹妹微信进行订购服务，若不是订购服务不要打扰两个小妹妹哦~ (≧∇≦)ﾉ</p>
+        
+        <div style="display: flex; justify-content: space-around; margin: 20px 0;">
+            <img src="minyiVX QR.jpg" alt="minyiVX" style="width: 317px; height: 443px;">
+            <img src="xiaoyinVX QR.jpg" alt="xiaoyinVX" style="width: 317px; height: 443px;">
+        </div>
+        
+        <p>记得备注“DMI订购服务”哦，否则两个小妹妹会忽略拒绝滴~还有优先选择左边的客服妹妹哦</p>
+        
+        <div style="margin-top: 20px; text-align: center;">
+            <div style="display: inline-block; padding: 10px; border: 1px solid #ccc; border-radius: 50px; cursor: pointer;" onclick="closeModal()">
+                我知道了
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function showModal() {
+        document.getElementById('myModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // 禁用滚动
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+        document.body.style.overflow = 'auto'; // 恢复滚动
+    }
+</script>
+
+</body>
+</html>
