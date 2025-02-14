@@ -6,7 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dreamirage - 主页</title>
     <style>
-        /* 添加一些基本的样式 */
+        /* 定义 MiSans 字体 */
+        @font-face {
+            font-family: 'MiSans';
+            src: url('fonts/MiSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'MiSans';
+            src: url('fonts/MiSans-Bold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        /* 全局字体设置 */
+        body {
+            font-family: 'MiSans', sans-serif;
+            margin: 0;
+        }
+
+        h1, h2, h3 {
+            font-family: 'MiSans', sans-serif;
+            font-weight: bold; /* 使用粗体 */
+        }
+
+        p {
+            font-family: 'MiSans', sans-serif;
+            font-weight: normal; /* 使用正常字体 */
+        }
+
+        /* 其他样式保持不变 */
         .nav-link {
             text-decoration: none;
             margin: 0 10px;
@@ -17,7 +48,7 @@
 
         .nav-link img {
             height: 20px;
-            margin-right: 5px; /* 图标与文字之间的间距 */
+            margin-right: 5px;
         }
 
         .button {
@@ -25,56 +56,56 @@
             align-items: center;
             justify-content: center;
             border: 1px solid #ccc;
-            border-radius: 30px; /* 100% 圆角 */
-            width: 156px; /* 按钮宽度 */
-            height: 51px; /* 按钮高度 */
-            margin-right: 20px; /* 增加按钮间隔 */
-            background-color: #f0f0f0; /* 背景色 */
-            color: #333; /* 文字颜色 */
-            font-size: 22px; /* 增加字号 */
+            border-radius: 30px;
+            width: 156px;
+            height: 51px;
+            margin-right: 20px;
+            background-color: #f0f0f0;
+            color: #333;
+            font-size: 22px;
             text-decoration: none;
-            transition: background-color 0.3s; /* 像素过渡效果 */
+            transition: background-color 0.3s;
         }
 
         .button:hover {
-            background-color: #e0e0e0; /* 悬停时的背景色 */
+            background-color: #e0e0e0;
         }
 
         .button img {
-            height: 35px; /* 图标高度 */
-            width: 35px; /* 图标宽度 */
-            margin-right: 8px; /* 图标与文字之间的间距 */
+            height: 35px;
+            width: 35px;
+            margin-right: 8px;
         }
 
         .card {
-            border: none; /* 去掉默认边框 */
+            border: none;
             border-radius: 8px;
             padding: 20px;
             width: 220px;
             margin: 15px;
             text-align: left;
-            transition: background-color 0.3s; /* 像素过渡效果 */
+            transition: background-color 0.3s;
         }
 
         .card:hover {
-            background-color: rgba(204, 204, 204, 0.5); /* 悬停时背景颜色 */
-            cursor: pointer; /* 鼠标悬停时显示为手形 */
+            background-color: rgba(204, 204, 204, 0.5);
+            cursor: pointer;
         }
 
         .card img {
-            height: 25px; /* 卡片图标高度 */
-            width: 25px; /* 卡片图标宽度 */
-            margin-right: 8px; /* 图标与文字之间的间距 */
-            vertical-align: middle; /* 垂直居中对齐 */
+            height: 25px;
+            width: 25px;
+            margin-right: 8px;
+            vertical-align: middle;
         }
     </style>
 </head>
 
-<body style="margin: 0;">
+<body>
     <!-- 顶栏色块 -->
     <div style="background-color: #f0f0f0; font-size: 14px; width: 100%; height: 60px; box-sizing: border-box; position: fixed; top: 0; left: 0; display: flex; align-items: center;">
         <div style="display: flex; align-items: center; margin-left: 20px;">
-            <img src="logo.png" alt="Logo" style="height: 40px; margin-right: 10px;"> <!-- Logo 图片 -->
+            <img src="logo.png" alt="Logo" style="height: 40px; margin-right: 10px;">
             <h1 style="margin: 0;">Dreamirage STUDIO</h1>
         </div>
 
@@ -186,7 +217,7 @@
 
     <!-- 公告栏 -->
     <div style="text-align: left; margin-left: 360px; margin-top: 50px;">
-        <h2 style="font-weight: bold;">公告栏</h2> <!-- 加粗字体 -->
+        <h2 style="font-weight: bold;">公告栏</h2>
         <p style="margin: 10px 0;">
             <span style="display: inline-block; width: 10px; height: 10px; background-color: black; border-radius: 50%; margin-right: 5px;"></span>
             教师定制PPT享受9折优惠，定制公开课课件享受8折优惠。
@@ -200,7 +231,6 @@
             目前网页还是纯前端，我们会快速完善的，敬请期待( •̀ ω •́ )✧
         </p>
     </div>
-
 </body>
 
 </html>
