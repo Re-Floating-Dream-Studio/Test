@@ -86,6 +86,8 @@
         .top-bar nav {
             display: flex;
             align-items: center;
+            margin-left: auto; /* 让导航栏靠右 */
+            margin-right: 20px; /* 右侧留出一些空间 */
         }
 
         .top-bar .nav-link {
@@ -93,10 +95,17 @@
             font-size: 16px;
             color: #2c3e50;
             transition: color 0.3s;
+            display: flex;
+            align-items: center;
         }
 
         .top-bar .nav-link:hover {
             color: #6a11cb;
+        }
+
+        .top-bar .nav-link img {
+            height: 20px;
+            margin-right: 5px;
         }
 
         /* 主界面样式 */
@@ -245,14 +254,38 @@
             <h1>Dreamirage Studio</h1>
         </div>
         <nav>
-            <a href="index.html" class="nav-link">主页</a>
-            <a href="服务.html" class="nav-link">服务</a>
-            <a href="我们.html" class="nav-link">我们</a>
-            <a href="作品展示.html" class="nav-link">作品展示</a>
-            <a href="价位表.html" class="nav-link">价位表</a>
-            <a href="留言板.html" class="nav-link">留言板</a>
-            <a href="赞助.html" class="nav-link">赞助</a>
-            <a href="关于.html" class="nav-link">关于</a>
+            <a href="index.html" class="nav-link">
+                <img src="home.svg" alt="主页">
+                主页
+            </a>
+            <a href="服务.html" class="nav-link">
+                <img src="services.svg" alt="服务">
+                服务
+            </a>
+            <a href="我们.html" class="nav-link">
+                <img src="about.svg" alt="我们">
+                我们
+            </a>
+            <a href="作品展示.html" class="nav-link">
+                <img src="portfolio.svg" alt="作品展示">
+                作品展示
+            </a>
+            <a href="价位表.html" class="nav-link">
+                <img src="pricing.svg" alt="价位表">
+                价位表
+            </a>
+            <a href="留言板.html" class="nav-link">
+                <img src="messageboard.svg" alt="留言板">
+                留言板
+            </a>
+            <a href="赞助.html" class="nav-link">
+                <img src="donate.svg" alt="赞助">
+                赞助
+            </a>
+            <a href="关于.html" class="nav-link">
+                <img src="aboutus.svg" alt="关于">
+                关于
+            </a>
         </nav>
     </div>
 
