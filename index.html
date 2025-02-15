@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
-
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,111 +7,145 @@
     <!-- 添加任务栏图标 -->
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <!-- 导入 MiSans 字体 -->
     <style>
-        /* 定义 MiSans 字体 */
         @font-face {
             font-family: 'MiSans';
             src: url('fonts/MiSans-Regular.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
         }
-
         @font-face {
             font-family: 'MiSans';
             src: url('fonts/MiSans-Bold.ttf') format('truetype');
             font-weight: bold;
             font-style: normal;
         }
+    </style>
+    <style>
+        /* 定义根字体大小 */
+        :root {
+            font-size: 15px;
+        }
 
         /* 全局样式 */
         body {
             font-family: 'MiSans', sans-serif;
             margin: 0;
-            background-color: #f5f5f7;
-            color: #333;
-            line-height: 1.6;
+            min-height: 100vh;
+            color: #333; /* 默认文字颜色为深色 */
         }
 
-        h1, h2, h3 {
-            font-family: 'MiSans', sans-serif;
-            font-weight: bold;
-            color: #2c3e50;
+        /* 主页背景样式 */
+        .home {
+            min-height: 100vh;
+            background-color: #f0f0f0; /* 备用背景色 */
+            background-image: 
+                radial-gradient(closest-side, rgba(255, 182, 193, 0.8), rgba(255, 182, 193, 0)), /* 浅粉色 */
+                radial-gradient(closest-side, rgba(173, 216, 230, 0.8), rgba(173, 216, 230, 0)), /* 浅蓝色 */
+                radial-gradient(closest-side, rgba(240, 230, 140, 0.8), rgba(240, 230, 140, 0)), /* 浅黄色 */
+                radial-gradient(closest-side, rgba(152, 251, 152, 0.8), rgba(152, 251, 152, 0)), /* 浅绿色 */
+                radial-gradient(closest-side, rgba(221, 160, 221, 0.8), rgba(221, 160, 221, 0)), /* 浅紫色 */
+                radial-gradient(closest-side, rgba(255, 160, 122, 0.8), rgba(255, 160, 122, 0)), /* 浅橙色 */
+                radial-gradient(closest-side, rgba(176, 224, 230, 0.8), rgba(176, 224, 230, 0)), /* 浅青色 */
+                radial-gradient(closest-side, rgba(255, 218, 185, 0.8), rgba(255, 218, 185, 0)), /* 浅桃色 */
+                radial-gradient(closest-side, rgba(240, 128, 128, 0.8), rgba(240, 128, 128, 0)), /* 浅红色 */
+                radial-gradient(closest-side, rgba(135, 206, 250, 0.8), rgba(135, 206, 250, 0)), /* 浅天蓝色 */
+                radial-gradient(closest-side, rgba(255, 239, 213, 0.8), rgba(255, 239, 213, 0)), /* 浅杏仁色 */
+                radial-gradient(closest-side, rgba(230, 230, 250, 0.8), rgba(230, 230, 250, 0)), /* 浅薰衣草色 */
+                radial-gradient(closest-side, rgba(255, 228, 196, 0.8), rgba(255, 228, 196, 0)), /* 浅杏色 */
+                radial-gradient(closest-side, rgba(175, 238, 238, 0.8), rgba(175, 238, 238, 0)), /* 浅青色 */
+                radial-gradient(closest-side, rgba(255, 222, 173, 0.8), rgba(255, 222, 173, 0)); /* 浅橙色 */
+            background-size: 
+                130vmax 130vmax,
+                80vmax 80vmax,
+                90vmax 90vmax,
+                110vmax 110vmax,
+                90vmax 90vmax,
+                120vmax 120vmax,
+                100vmax 100vmax,
+                130vmax 130vmax,
+                80vmax 80vmax,
+                90vmax 90vmax,
+                110vmax 110vmax,
+                90vmax 90vmax,
+                120vmax 120vmax,
+                100vmax 100vmax,
+                130vmax 130vmax;
+            background-position:
+                -80vmax -80vmax,
+                60vmax -30vmax,
+                10vmax 10vmax,
+                -30vmax -10vmax,
+                50vmax 50vmax,
+                -60vmax 60vmax,
+                70vmax -70vmax,
+                -80vmax -80vmax,
+                60vmax -30vmax,
+                10vmax 10vmax,
+                -30vmax -10vmax,
+                50vmax 50vmax,
+                -60vmax 60vmax,
+                70vmax -70vmax,
+                -80vmax -80vmax;
+            background-repeat: no-repeat;
+            animation: 10s movement linear infinite;
+            position: relative;
+            z-index: 1;
         }
 
-        p {
-            font-family: 'MiSans', sans-serif;
-            font-weight: normal;
-            color: #666;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
+        .home::after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: -1; /* 确保背景模糊层在内容之下 */
         }
 
         /* 顶栏样式 */
-        .top-bar {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            width: 100%;
-            height: 70px;
-            position: fixed;
-            top: 0;
-            left: 0;
+        .navbar {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
+            border-bottom: 1px solid rgba(221, 221, 221, 0.5); /* 半透明边框 */
+            backdrop-filter: blur(5px); /* 背景模糊效果 */
+            position: fixed;
+            width: 100%;
+            top: 0;
             z-index: 1000;
         }
 
-        .top-bar .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .top-bar .logo img {
-            height: 40px;
-            margin-right: 10px;
-        }
-
-        .top-bar .logo h1 {
-            margin: 0;
-            font-size: 24px;
-            color: #2c3e50;
-        }
-
-        .top-bar nav {
-            display: flex;
-            align-items: center;
-            margin-left: auto; /* 让导航栏靠右 */
-            margin-right: 20px; /* 右侧留出一些空间 */
-        }
-
-        .top-bar .nav-link {
+        .navbar a {
+            text-decoration: none;
+            color: #333; /* 顶栏文字颜色 */
             margin: 0 15px;
-            font-size: 16px;
-            color: #2c3e50;
-            transition: color 0.3s;
-            display: flex;
-            align-items: center;
+            font-weight: bold;
         }
 
-        .top-bar .nav-link:hover {
-            color: #6a11cb;
+        .navbar img {
+            width: 20px;
+            vertical-align: middle;
         }
 
-        .top-bar .nav-link img {
-            height: 20px;
-            margin-right: 5px;
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333; /* 顶栏 Logo 颜色 */
         }
 
         /* 主界面样式 */
         .main-content {
-            margin-top: 100px;
-            padding: 40px 20px;
+            padding: 100px 20px 40px;
             text-align: center;
+            position: relative;
+            z-index: 10; /* 确保内容在背景模糊层之上 */
         }
 
         .main-content img {
@@ -130,11 +163,12 @@
         .main-content h2 {
             margin: 20px 0 10px;
             font-size: 48px;
+            color: #333; /* 标题颜色改为深色 */
         }
 
         .main-content p {
             font-size: 18px;
-            color: #666;
+            color: #555; /* 段落文字颜色改为深灰色 */
         }
 
         .button-container {
@@ -177,16 +211,22 @@
             flex-wrap: wrap;
             gap: 20px;
             padding: 40px 20px;
+            position: relative;
+            z-index: 10; /* 确保内容在背景模糊层之上 */
         }
 
         .card {
-            background: white;
+            background: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
             border-radius: 15px;
             padding: 20px;
             width: 250px;
             text-align: left;
             transition: transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px); /* 背景模糊效果 */
+            text-decoration: none; /* 去掉链接下划线 */
+            display: block; /* 使整个卡片可点击 */
+            color: inherit; /* 继承父元素文字颜色 */
         }
 
         .card:hover {
@@ -204,35 +244,32 @@
         .card h3 {
             margin: 0;
             font-size: 20px;
-            color: #2c3e50;
+            color: #333; /* 标题颜色改为深色 */
         }
 
         .card p {
             margin: 5px 0;
             font-size: 16px;
-            color: #666;
+            color: #555; /* 段落文字颜色改为深灰色 */
         }
 
         /* 公告栏样式 */
         .announcement {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 40px auto;
-            max-width: 800px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background: white; /* 白色背景 */
+            padding: 40px 20px;
+            text-align: center;
         }
 
         .announcement h2 {
             margin: 0 0 20px;
             font-size: 24px;
-            color: #2c3e50;
+            color: #333; /* 标题颜色改为深色 */
         }
 
         .announcement p {
             margin: 10px 0;
             font-size: 16px;
-            color: #666;
+            color: #666; /* 段落文字颜色改为深灰色 */
         }
 
         .announcement span {
@@ -243,99 +280,219 @@
             border-radius: 50%;
             margin-right: 5px;
         }
+
+        /* 背景动画 */
+        @keyframes movement {
+            0%, 100% {
+                background-size: 
+                    130vmax 130vmax,
+                    80vmax 80vmax,
+                    90vmax 90vmax,
+                    110vmax 110vmax,
+                    90vmax 90vmax,
+                    120vmax 120vmax,
+                    100vmax 100vmax,
+                    130vmax 130vmax,
+                    80vmax 80vmax,
+                    90vmax 90vmax,
+                    110vmax 110vmax,
+                    90vmax 90vmax,
+                    120vmax 120vmax,
+                    100vmax 100vmax,
+                    130vmax 130vmax;
+                background-position:
+                    -80vmax -80vmax,
+                    60vmax -30vmax,
+                    10vmax 10vmax,
+                    -30vmax -10vmax,
+                    50vmax 50vmax,
+                    -60vmax 60vmax,
+                    70vmax -70vmax,
+                    -80vmax -80vmax,
+                    60vmax -30vmax,
+                    10vmax 10vmax,
+                    -30vmax -10vmax,
+                    50vmax 50vmax,
+                    -60vmax 60vmax,
+                    70vmax -70vmax,
+                    -80vmax -80vmax;
+            }
+            25% {
+                background-size: 
+                    100vmax 100vmax,
+                    90vmax 90vmax,
+                    100vmax 100vmax,
+                    90vmax 90vmax,
+                    60vmax 60vmax,
+                    110vmax 110vmax,
+                    80vmax 80vmax,
+                    100vmax 100vmax,
+                    90vmax 90vmax,
+                    100vmax 100vmax,
+                    90vmax 90vmax,
+                    60vmax 60vmax,
+                    110vmax 110vmax,
+                    80vmax 80vmax,
+                    100vmax 100vmax;
+                background-position:
+                    -60vmax -90vmax,
+                    50vmax -40vmax,
+                    0vmax -20vmax,
+                    -40vmax -20vmax,
+                    40vmax 60vmax,
+                    -50vmax 50vmax,
+                    60vmax -60vmax,
+                    -60vmax -90vmax,
+                    50vmax -40vmax,
+                    0vmax -20vmax,
+                    -40vmax -20vmax,
+                    40vmax 60vmax,
+                    -50vmax 50vmax,
+                    60vmax -60vmax,
+                    -60vmax -90vmax;
+            }
+            50% {
+                background-size: 
+                    80vmax 80vmax,
+                    110vmax 110vmax,
+                    80vmax 80vmax,
+                    60vmax 60vmax,
+                    80vmax 80vmax,
+                    90vmax 90vmax,
+                    70vmax 70vmax,
+                    80vmax 80vmax,
+                    110vmax 110vmax,
+                    80vmax 80vmax,
+                    60vmax 60vmax,
+                    80vmax 80vmax,
+                    90vmax 90vmax,
+                    70vmax 70vmax,
+                    80vmax 80vmax;
+                background-position:
+                    -50vmax -70vmax,
+                    40vmax -30vmax,
+                    10vmax 0vmax,
+                    20vmax 10vmax,
+                    30vmax 70vmax,
+                    -40vmax 40vmax,
+                    50vmax -50vmax,
+                    -50vmax -70vmax,
+                    40vmax -30vmax,
+                    10vmax 0vmax,
+                    20vmax 10vmax,
+                    30vmax 70vmax,
+                    -40vmax 40vmax,
+                    50vmax -50vmax,
+                    -50vmax -70vmax;
+            }
+            75% {
+                background-size: 
+                    90vmax 90vmax,
+                    90vmax 90vmax,
+                    100vmax 100vmax,
+                    90vmax 90vmax,
+                    70vmax 70vmax,
+                    80vmax 80vmax,
+                    60vmax 60vmax,
+                    90vmax 90vmax,
+                    90vmax 90vmax,
+                    100vmax 100vmax,
+                    90vmax 90vmax,
+                    70vmax 70vmax,
+                    80vmax 80vmax,
+                    60vmax 60vmax,
+                    90vmax 90vmax;
+                background-position:
+                    -50vmax -40vmax,
+                    50vmax -30vmax,
+                    20vmax 0vmax,
+                    -10vmax 10vmax,
+                    40vmax 60vmax,
+                    -30vmax 30vmax,
+                    40vmax -40vmax,
+                    -50vmax -40vmax,
+                    50vmax -30vmax,
+                    20vmax 0vmax,
+                    -10vmax 10vmax,
+                    40vmax 60vmax,
+                    -30vmax 30vmax,
+                    40vmax -40vmax,
+                    -50vmax -40vmax;
+            }
+        }
     </style>
 </head>
-
 <body>
     <!-- 顶栏 -->
-    <div class="top-bar">
-        <div class="logo">
-            <img src="logo.png" alt="Logo">
-            <h1>Dreamirage Studio</h1>
+    <div class="navbar">
+        <div class="logo">Dreamirage</div>
+        <div>
+            <a href="#"><img src="home-icon.png" alt="主页"> 主页</a>
+            <a href="#"><img src="about-icon.png" alt="我们"> 我们</a>
+            <a href="#"><img src="work-icon.png" alt="作品"> 作品</a>
+            <a href="#"><img src="services-icon.png" alt="服务"> 服务</a>
         </div>
-        <nav>
-            <a href="index.html" class="nav-link">
-                <img src="home.svg" alt="主页">
-                主页
+        <div>
+            <a href="https://github.com/Draemirage-Studio" target="_blank">
+                <img src="github-icon.png" alt="GitHub">
             </a>
-            <a href="服务.html" class="nav-link">
-                <img src="services.svg" alt="服务">
-                服务
+            <a href="https://www.bilibili.com" target="_blank">
+                <img src="camera-icon.png" alt="Camera">
             </a>
-            <a href="我们.html" class="nav-link">
-                <img src="about.svg" alt="我们">
-                我们
-            </a>
-            <a href="作品展示.html" class="nav-link">
-                <img src="portfolio.svg" alt="作品展示">
-                作品展示
-            </a>
-            <a href="价位表.html" class="nav-link">
-                <img src="pricing.svg" alt="价位表">
-                价位表
-            </a>
-            <a href="留言板.html" class="nav-link">
-                <img src="messageboard.svg" alt="留言板">
-                留言板
-            </a>
-            <a href="赞助.html" class="nav-link">
-                <img src="donate.svg" alt="赞助">
-                赞助
-            </a>
-            <a href="关于.html" class="nav-link">
-                <img src="aboutus.svg" alt="关于">
-                关于
-            </a>
-        </nav>
-    </div>
-
-    <!-- 主界面 -->
-    <div class="main-content">
-        <img src="big_logo.png" alt="Big Logo">
-        <h2>Dreamirage Studio</h2>
-        <p>高端的设计不需要高昂的价格</p>
-        <div class="button-container">
-            <a href="index.html" class="button">
-                <img src="home.svg" alt="主页">主页
-            </a>
-            <a href="服务.html" class="button">
-                <img src="services.svg" alt="服务">服务
-            </a>
-            <a href="我们.html" class="button">
-                <img src="about.svg" alt="我们">我们
-            </a>
+            <a href="info.html" target="_blank">
+                <img src="info-icon.png" alt="Info">
+            </a>   
         </div>
     </div>
 
-    <!-- 卡片区域 -->
-    <div class="card-container">
-        <div class="card">
-            <a href="服务.html">
+    <!-- 主页 -->
+    <div class="home">
+        <div class="main-content">
+            <img src="big_logo.png" alt="Big Logo">
+            <h2>Dreamirage Studio</h2>
+            <p>高端的设计不需要高昂的价格</p>
+            <div class="button-container">
+                <a href="index.html" class="button">
+                    <img src="home.svg" alt="主页">主页
+                </a>
+                <a href="服务.html" class="button">
+                    <img src="services.svg" alt="服务">服务
+                </a>
+                <a href="我们.html" class="button">
+                    <img src="about.svg" alt="我们">我们
+                </a>
+            </div>
+        </div>
+
+        <!-- 卡片区域 -->
+        <div class="card-container">
+            <!-- 订购服务 -->
+            <a href="服务.html" class="card">
                 <img src="services.svg" alt="服务">
                 <h3>订购服务</h3>
+                <p>哦你要设计啊，来叭，点击预定服务。</p>
             </a>
-            <p>哦你要设计啊，来叭，点击预定服务。</p>
-        </div>
-        <div class="card">
-            <a href="留言板.html">
+
+            <!-- 留言板 -->
+            <a href="留言板.html" class="card">
                 <img src="messageboard.svg" alt="留言板">
                 <h3>留言板</h3>
+                <p>听说你有东西和我们说？来这留言叭~</p>
             </a>
-            <p>听说你有东西和我们说？来这留言叭~</p>
-        </div>
-        <div class="card">
-            <a href="赞助.html">
+
+            <!-- 请杯奶茶呗 -->
+            <a href="赞助.html" class="card">
                 <img src="donate.svg" alt="赞助">
                 <h3>请杯奶茶呗</h3>
+                <p>学习一星期了，请我们喝杯奶茶叭，要补补脑子才可以继续设计哒。</p>
             </a>
-            <p>学习一星期了，请我们喝杯奶茶叭，要补补脑子才可以继续设计哒。</p>
-        </div>
-        <div class="card">
-            <a href="问题.html">
+
+            <!-- 问题 -->
+            <a href="问题.html" class="card">
                 <img src="question.svg" alt="问题">
                 <h3>问题</h3>
+                <p>你有什么疑问吗？这里解决哟~</p>
             </a>
-            <p>你有什么疑问吗？这里解决哟~</p>
         </div>
     </div>
 
@@ -356,5 +513,4 @@
         </p>
     </div>
 </body>
-
 </html>
