@@ -58,27 +58,94 @@
             color: #333; /* 顶栏 Logo 颜色 */
         }
 
-        /* 中间选项 */
+        /* 中间四个选项 */
         .navbar .nav-center {
             display: flex;
             justify-content: center;
             align-items: center;
             flex: 1; /* 占据剩余空间 */
             gap: 20px; /* 选项之间的间距 */
+            margin-left: -80px; /* 调整居中，减少左边距 */
         }
 
         .navbar .nav-center a {
             text-decoration: none;
             color: #333; /* 文字颜色 */
             font-weight: bold;
+            position: relative;
+            padding: 10px 15px; /* 增加内边距，方便圆角块显示 */
+            transition: all 0.3s ease; /* 添加过渡效果 */
         }
 
-        .navbar .nav-center img {
+        /* 圆角块效果 */
+        .navbar .nav-center a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.1); /* 圆角块背景色 */
+            border-radius: 10px; /* 圆角 */
+            transform: translate(-50%, -50%) scale(0); /* 初始状态为缩小 */
+            transition: all 0.3s ease; /* 过渡效果 */
+            z-index: -1; /* 置于文字和图标下方 */
+        }
+
+        /* 鼠标悬停时显示圆角块 */
+        .navbar .nav-center a:hover::before {
+            transform: translate(-50%, -50%) scale(1); /* 放大到正常大小 */
+        }
+
+        /* 图标过渡效果 */
+        .navbar .nav-center a img {
             width: 20px;
             vertical-align: middle;
+            transition: all 0.3s ease; /* 添加过渡效果 */
         }
 
-        /* 右侧图标 */
+        /* 鼠标悬停时切换图标 */
+        .navbar .nav-center a:hover img {
+            opacity: 0; /* 隐藏原图标 */
+        }
+
+        /* 鼠标悬停时显示新图标 */
+        .navbar .nav-center a::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background-size: cover;
+            transform: translate(-50%, -50%);
+            opacity: 0; /* 初始状态为隐藏 */
+            transition: all 0.3s ease; /* 过渡效果 */
+        }
+
+        /* 为每个选项设置不同的新图标 */
+        .navbar .nav-center a[href="index.html"]::after {
+            background-image: url('icon1.png'); /* 主页图标 */
+        }
+
+        .navbar .nav-center a[href="我们.html"]::after {
+            background-image: url('icon2.png'); /* 我们图标 */
+        }
+
+        .navbar .nav-center a[href="作品展示.html"]::after {
+            background-image: url('icon3.png'); /* 作品图标 */
+        }
+
+        .navbar .nav-center a[href="服务.html"]::after {
+            background-image: url('icon4.png'); /* 服务图标 */
+        }
+
+        /* 鼠标悬停时显示新图标 */
+        .navbar .nav-center a:hover::after {
+            opacity: 1; /* 显示新图标 */
+        }
+
+        /* 右侧三个图标 */
         .navbar .nav-right {
             display: flex;
             align-items: center;
@@ -199,8 +266,9 @@
         <div class="logo">Dreamirage</div>
         <div class="nav-center">
             <a href="index.html"><img src="home-icon.png" alt="主页"> 主页</a>
-            <a href="服务.html"><img src="services-icon.png" alt="服务"> 服务</a>
             <a href="我们.html"><img src="about-icon.png" alt="我们"> 我们</a>
+            <a href="作品展示.html"><img src="work-icon.png" alt="作品"> 作品</a>
+            <a href="服务.html"><img src="services-icon.png" alt="服务"> 服务</a>
         </div>
         <div class="nav-right">
             <a href="https://github.com/Draemirage-Studio" target="_blank">

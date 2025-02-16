@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
-
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,154 +7,497 @@
     <!-- 添加任务栏图标 -->
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <!-- 导入 MiSans 字体 -->
     <style>
-        /* 定义 MiSans 字体 */
         @font-face {
             font-family: 'MiSans';
             src: url('fonts/MiSans-Regular.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
         }
-
         @font-face {
             font-family: 'MiSans';
             src: url('fonts/MiSans-Bold.ttf') format('truetype');
             font-weight: bold;
             font-style: normal;
         }
+    </style>
+    <style>
+        /* 定义根字体大小 */
+        :root {
+            font-size: 15px;
+        }
 
-        /* 全局字体设置 */
+        /* 全局样式 */
         body {
             font-family: 'MiSans', sans-serif;
             margin: 0;
+            min-height: 100vh;
+            color: #333; /* 默认文字颜色为深色 */
         }
 
-        h1, h2, h3 {
-            font-family: 'MiSans', sans-serif;
-            font-weight: bold; /* 使用粗体 */
+        /* 主页背景样式 */
+        .home {
+            min-height: 100vh;
+            background-color: #f0f0f0; /* 备用背景色 */
+            background-image: 
+                radial-gradient(closest-side, rgba(255, 182, 193, 0.8), rgba(255, 182, 193, 0)), /* 浅粉色 */
+                radial-gradient(closest-side, rgba(173, 216, 230, 0.8), rgba(173, 216, 230, 0)), /* 浅蓝色 */
+                radial-gradient(closest-side, rgba(240, 230, 140, 0.8), rgba(240, 230, 140, 0)), /* 浅黄色 */
+                radial-gradient(closest-side, rgba(152, 251, 152, 0.8), rgba(152, 251, 152, 0)), /* 浅绿色 */
+                radial-gradient(closest-side, rgba(221, 160, 221, 0.8), rgba(221, 160, 221, 0)), /* 浅紫色 */
+                radial-gradient(closest-side, rgba(255, 160, 122, 0.8), rgba(255, 160, 122, 0)), /* 浅橙色 */
+                radial-gradient(closest-side, rgba(176, 224, 230, 0.8), rgba(176, 224, 230, 0)), /* 浅青色 */
+                radial-gradient(closest-side, rgba(255, 218, 185, 0.8), rgba(255, 218, 185, 0)), /* 浅桃色 */
+                radial-gradient(closest-side, rgba(240, 128, 128, 0.8), rgba(240, 128, 128, 0)), /* 浅红色 */
+                radial-gradient(closest-side, rgba(135, 206, 250, 0.8), rgba(135, 206, 250, 0)), /* 浅天蓝色 */
+                radial-gradient(closest-side, rgba(255, 239, 213, 0.8), rgba(255, 239, 213, 0)), /* 浅杏仁色 */
+                radial-gradient(closest-side, rgba(230, 230, 250, 0.8), rgba(230, 230, 250, 0)), /* 浅薰衣草色 */
+                radial-gradient(closest-side, rgba(255, 228, 196, 0.8), rgba(255, 228, 196, 0)), /* 浅杏色 */
+                radial-gradient(closest-side, rgba(175, 238, 238, 0.8), rgba(175, 238, 238, 0)), /* 浅青色 */
+                radial-gradient(closest-side, rgba(255, 222, 173, 0.8), rgba(255, 222, 173, 0)); /* 浅橙色 */
+            background-size: 
+                130vmax 130vmax,
+                80vmax 80vmax,
+                90vmax 90vmax,
+                110vmax 110vmax,
+                90vmax 90vmax,
+                120vmax 120vmax,
+                100vmax 100vmax,
+                130vmax 130vmax,
+                80vmax 80vmax,
+                90vmax 90vmax,
+                110vmax 110vmax,
+                90vmax 90vmax,
+                120vmax 120vmax,
+                100vmax 100vmax,
+                130vmax 130vmax;
+            background-position:
+                -80vmax -80vmax,
+                60vmax -30vmax,
+                10vmax 10vmax,
+                -30vmax -10vmax,
+                50vmax 50vmax,
+                -60vmax 60vmax,
+                70vmax -70vmax,
+                -80vmax -80vmax,
+                60vmax -30vmax,
+                10vmax 10vmax,
+                -30vmax -10vmax,
+                50vmax 50vmax,
+                -60vmax 60vmax,
+                70vmax -70vmax,
+                -80vmax -80vmax;
+            background-repeat: no-repeat;
+            animation: 10s movement linear infinite;
+            position: relative;
+            z-index: 1;
         }
 
-        p {
-            font-family: 'MiSans', sans-serif;
-            font-weight: normal; /* 使用正常字体 */
+        .home::after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: -1; /* 确保背景模糊层在内容之下 */
         }
 
-        /* 其他样式保持不变 */
-        .nav-link {
+        /* 顶栏样式 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
+            border-bottom: 1px solid rgba(221, 221, 221, 0.5); /* 半透明边框 */
+            backdrop-filter: blur(5px); /* 背景模糊效果 */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* 左侧 Logo */
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333; /* 顶栏 Logo 颜色 */
+        }
+
+        /* 中间四个选项 */
+        .navbar .nav-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1; /* 占据剩余空间 */
+            gap: 20px; /* 选项之间的间距 */
+            margin-left: -80px; /* 调整居中，减少左边距 */
+        }
+
+        .navbar .nav-center a {
             text-decoration: none;
-            margin: 0 10px;
+            color: #333; /* 文字颜色 */
+            font-weight: bold;
+            position: relative;
+            padding: 10px 15px; /* 增加内边距，方便圆角块显示 */
+            transition: all 0.3s ease; /* 添加过渡效果 */
+        }
+
+        /* 圆角块效果 */
+        .navbar .nav-center a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.1); /* 圆角块背景色 */
+            border-radius: 10px; /* 圆角 */
+            transform: translate(-50%, -50%) scale(0); /* 初始状态为缩小 */
+            transition: all 0.3s ease; /* 过渡效果 */
+            z-index: -1; /* 置于文字和图标下方 */
+        }
+
+        /* 鼠标悬停时显示圆角块 */
+        .navbar .nav-center a:hover::before {
+            transform: translate(-50%, -50%) scale(1); /* 放大到正常大小 */
+        }
+
+        /* 图标过渡效果 */
+        .navbar .nav-center a img {
+            width: 20px;
+            vertical-align: middle;
+            transition: all 0.3s ease; /* 添加过渡效果 */
+        }
+
+        /* 鼠标悬停时切换图标 */
+        .navbar .nav-center a:hover img {
+            opacity: 0; /* 隐藏原图标 */
+        }
+
+        /* 鼠标悬停时显示新图标 */
+        .navbar .nav-center a::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background-size: cover;
+            transform: translate(-50%, -50%);
+            opacity: 0; /* 初始状态为隐藏 */
+            transition: all 0.3s ease; /* 过渡效果 */
+        }
+
+        /* 为每个选项设置不同的新图标 */
+        .navbar .nav-center a[href="index.html"]::after {
+            background-image: url('icon1.png'); /* 主页图标 */
+        }
+
+        .navbar .nav-center a[href="我们.html"]::after {
+            background-image: url('icon2.png'); /* 我们图标 */
+        }
+
+        .navbar .nav-center a[href="作品展示.html"]::after {
+            background-image: url('icon3.png'); /* 作品图标 */
+        }
+
+        .navbar .nav-center a[href="服务.html"]::after {
+            background-image: url('icon4.png'); /* 服务图标 */
+        }
+
+        /* 鼠标悬停时显示新图标 */
+        .navbar .nav-center a:hover::after {
+            opacity: 1; /* 显示新图标 */
+        }
+
+        /* 右侧三个图标 */
+        .navbar .nav-right {
             display: flex;
             align-items: center;
-            color: inherit;
+            gap: 10px; /* 图标之间的间距 */
+            margin-right: 25px; /* 减少右边距 */
         }
 
-        .nav-link img {
-            height: 20px;
-            margin-right: 5px;
+        .navbar .nav-right a {
+            text-decoration: none;
+            color: #333; /* 文字颜色 */
+        }
+
+        .navbar .nav-right img {
+            width: 20px;
+            vertical-align: middle;
+        }
+
+        /* 主界面样式 */
+        .main-content {
+            padding: 200px 20px 40px; /* weizhi */
+            text-align: center;
+            position: relative;
+            z-index: 10; /* 确保内容在背景模糊层之上 */
+        }
+
+        .main-content img {
+            height: 250px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .main-content img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-content h2 {
+            margin: 20px 0 10px;
+            font-size: 48px;
+            color: #333; /* 标题颜色改为深色 */
+        }
+
+        .main-content p {
+            font-size: 18px;
+            color: #555; /* 段落文字颜色改为深灰色 */
+        }
+
+        .button-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
 
         .button {
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #ccc;
+            border: none;
             border-radius: 30px;
-            width: 156px;
-            height: 51px;
-            margin-right: 20px;
-            background-color: #f0f0f0;
-            color: #333;
-            font-size: 22px;
-            text-decoration: none;
-            transition: background-color 0.3s;
+            width: 160px;
+            height: 50px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            font-size: 18px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-decoration: none; /* 隐藏下划线 */
         }
 
         .button:hover {
-            background-color: #e0e0e0;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
 
         .button img {
-            height: 35px;
-            width: 35px;
-            margin-right: 8px;
-        }
-
-        .card {
-            border: none;
-            border-radius: 8px;
-            padding: 20px;
-            width: 220px;
-            margin: 15px;
-            text-align: left;
-            transition: background-color 0.3s;
-        }
-
-        .card:hover {
-            background-color: rgba(204, 204, 204, 0.5);
-            cursor: pointer;
-        }
-
-        .card img {
             height: 25px;
             width: 25px;
             margin-right: 8px;
-            vertical-align: middle;
+        }
+
+        /* 公告栏样式 */
+        .announcement {
+            background: white; /* 白色背景 */
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .announcement h2 {
+            margin: 0 0 20px;
+            font-size: 24px;
+            color: #333; /* 标题颜色改为深色 */
+        }
+
+        .announcement p {
+            margin: 10px 0;
+            font-size: 16px;
+            color: #666; /* 段落文字颜色改为深灰色 */
+        }
+
+        .announcement span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: #6a11cb;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        /* 背景动画 */
+        @keyframes movement {
+            0%, 100% {
+                background-size: 
+                    130vmax 130vmax,
+                    80vmax 80vmax,
+                    90vmax 90vmax,
+                    110vmax 110vmax,
+                    90vmax 90vmax,
+                    120vmax 120vmax,
+                    100vmax 100vmax,
+                    130vmax 130vmax,
+                    80vmax 80vmax,
+                    90vmax 90vmax,
+                    110vmax 110vmax,
+                    90vmax 90vmax,
+                    120vmax 120vmax,
+                    100vmax 100vmax,
+                    130vmax 130vmax;
+                background-position:
+                    -80vmax -80vmax,
+                    60vmax -30vmax,
+                    10vmax 10vmax,
+                    -30vmax -10vmax,
+                    50vmax 50vmax,
+                    -60vmax 60vmax,
+                    70vmax -70vmax,
+                    -80vmax -80vmax,
+                    60vmax -30vmax,
+                    10vmax 10vmax,
+                    -30vmax -10vmax,
+                    50vmax 50vmax,
+                    -60vmax 60vmax,
+                    70vmax -70vmax,
+                    -80vmax -80vmax;
+            }
+            25% {
+                background-size: 
+                    100vmax 100vmax,
+                    90vmax 90vmax,
+                    100vmax 100vmax,
+                    90vmax 90vmax,
+                    60vmax 60vmax,
+                    110vmax 110vmax,
+                    80vmax 80vmax,
+                    100vmax 100vmax,
+                    90vmax 90vmax,
+                    100vmax 100vmax,
+                    90vmax 90vmax,
+                    60vmax 60vmax,
+                    110vmax 110vmax,
+                    80vmax 80vmax,
+                    100vmax 100vmax;
+                background-position:
+                    -60vmax -90vmax,
+                    50vmax -40vmax,
+                    0vmax -20vmax,
+                    -40vmax -20vmax,
+                    40vmax 60vmax,
+                    -50vmax 50vmax,
+                    60vmax -60vmax,
+                    -60vmax -90vmax,
+                    50vmax -40vmax,
+                    0vmax -20vmax,
+                    -40vmax -20vmax,
+                    40vmax 60vmax,
+                    -50vmax 50vmax,
+                    60vmax -60vmax,
+                    -60vmax -90vmax;
+            }
+            50% {
+                background-size: 
+                    80vmax 80vmax,
+                    110vmax 110vmax,
+                    80vmax 80vmax,
+                    60vmax 60vmax,
+                    80vmax 80vmax,
+                    90vmax 90vmax,
+                    70vmax 70vmax,
+                    80vmax 80vmax,
+                    110vmax 110vmax,
+                    80vmax 80vmax,
+                    60vmax 60vmax,
+                    80vmax 80vmax,
+                    90vmax 90vmax,
+                    70vmax 70vmax,
+                    80vmax 80vmax;
+                background-position:
+                    -50vmax -70vmax,
+                    40vmax -30vmax,
+                    10vmax 0vmax,
+                    20vmax 10vmax,
+                    30vmax 70vmax,
+                    -40vmax 40vmax,
+                    50vmax -50vmax,
+                    -50vmax -70vmax,
+                    40vmax -30vmax,
+                    10vmax 0vmax,
+                    20vmax 10vmax,
+                    30vmax 70vmax,
+                    -40vmax 40vmax,
+                    50vmax -50vmax,
+                    -50vmax -70vmax;
+            }
+            75% {
+                background-size: 
+                    90vmax 90vmax,
+                    90vmax 90vmax,
+                    100vmax 100vmax,
+                    90vmax 90vmax,
+                    70vmax 70vmax,
+                    80vmax 80vmax,
+                    60vmax 60vmax,
+                    90vmax 90vmax,
+                    90vmax 90vmax,
+                    100vmax 100vmax,
+                    90vmax 90vmax,
+                    70vmax 70vmax,
+                    80vmax 80vmax,
+                    60vmax 60vmax,
+                    90vmax 90vmax;
+                background-position:
+                    -50vmax -40vmax,
+                    50vmax -30vmax,
+                    20vmax 0vmax,
+                    -10vmax 10vmax,
+                    40vmax 60vmax,
+                    -30vmax 30vmax,
+                    40vmax -40vmax,
+                    -50vmax -40vmax,
+                    50vmax -30vmax,
+                    20vmax 0vmax,
+                    -10vmax 10vmax,
+                    40vmax 60vmax,
+                    -30vmax 30vmax,
+                    40vmax -40vmax,
+                    -50vmax -40vmax;
+            }
         }
     </style>
 </head>
-
 <body>
-    <!-- 顶栏色块 -->
-    <div style="background-color: #f0f0f0; font-size: 14px; width: 100%; height: 60px; box-sizing: border-box; position: fixed; top: 0; left: 0; display: flex; align-items: center;">
-        <div style="display: flex; align-items: center; margin-left: 20px;">
-            <img src="logo.png" alt="Logo" style="height: 50px; margin-right: 15px;">
-            <h1 style="margin: 0;">Dreamirage Studio</h1>
+    <!-- 顶栏 -->
+    <div class="navbar">
+        <div class="logo">Dreamirage</div>
+        <div class="nav-center">
+            <a href="index.html"><img src="home-icon.png" alt="主页"> 主页</a>
+            <a href="我们.html"><img src="about-icon.png" alt="我们"> 我们</a>
+            <a href="作品展示.html"><img src="work-icon.png" alt="作品"> 作品</a>
+            <a href="服务.html"><img src="services-icon.png" alt="服务"> 服务</a>
         </div>
-
-        <!-- 按钮容器 -->
-        <nav style="margin-left: 20px; display: flex; justify-content: center; flex: 1;">
-            <a href="index.html" class="nav-link">
-                <img src="home.svg" alt="主页">
-                主页
+        <div class="nav-right">
+            <a href="https://github.com/Draemirage-Studio" target="_blank">
+                <img src="github-icon.png" alt="GitHub">
             </a>
-            <a href="服务.html" class="nav-link">
-                <img src="services.svg" alt="服务">
-                服务
+            <a href="https://www.bilibili.com" target="_blank">
+                <img src="camera-icon.png" alt="Camera">
             </a>
-            <a href="我们.html" class="nav-link">
-                <img src="about.svg" alt="我们">
-                我们
+            <a href="info.html" target="_blank">
+                <img src="info-icon.png" alt="Info">
             </a>
-            <a href="作品展示.html" class="nav-link">
-                <img src="portfolio.svg" alt="作品展示">
-                作品展示
-            </a>
-            <a href="价位表.html" class="nav-link">
-                <img src="pricing.svg" alt="价位表">
-                价位表
-            </a>
-            <a href="留言板.html" class="nav-link">
-                <img src="messageboard.svg" alt="留言板">
-                留言板
-            </a>
-            <a href="赞助.html" class="nav-link">
-                <img src="donate.svg" alt="赞助">
-                赞助
-            </a>
-            <a href="关于.html" class="nav-link">
-                <img src="aboutus.svg" alt="关于">
-                关于
-            </a>
-        </nav>
+        </div>
     </div>
 
-    <!-- 主界面 -->
-    <div style="margin-top: 96px; display: flex; align-items: center; justify-content: center;">
-        <img src="big_logo.png" alt="Big Logo" style="height: 310px; margin-right: 55px;">
-        <div style="text-align: left; margin-top: 20px;">
-            <h2 style="margin: 0; font-size: 60px;">Dreamirage Studio</h2>
-            <p style="margin: 10px 0;">高端的设计不需要高昂的价格</p>
-            <div style="margin-top: 10px; display: flex;">
+    <!-- 主页 -->
+    <div class="home">
+        <div class="main-content">
+            <img src="big_logo.png" alt="Big Logo">
+            <h2>Dreamirage Studio</h2>
+            <p>高端的设计不需要高昂的价格</p>
+            <div class="button-container">
                 <a href="index.html" class="button">
                     <img src="home.svg" alt="主页">主页
                 </a>
@@ -169,71 +511,21 @@
         </div>
     </div>
 
-    <!-- 分割线 -->
-    <div style="text-align: center; margin-top: 40px;">
-        <hr style="width: 66.67%; margin: 0 auto; border: 1px solid #ccc;">
-    </div>
-
-    <!-- 卡片区域 -->
-    <div style="display: flex; justify-content: center; flex-wrap: wrap; margin-top: 40px;">
-        <!-- 卡片1 -->
-        <div class="card">
-            <a href="服务.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
-                <img src="services.svg" alt="服务">
-                <h3 style="margin: 0; font-size: 20px;">订购服务</h3>
-            </a>
-            <p style="margin: 5px 0; font-size: 16px;">哦你要设计啊?来叭，点击预定服务。</p>
-        </div>
-
-        <!-- 卡片2 -->
-        <div class="card">
-            <a href="留言板.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
-                <img src="messageboard.svg" alt="留言板">
-                <h3 style="margin: 0; font-size: 20px;">留言板</h3>
-            </a>
-            <p style="margin: 5px 0; font-size: 16px;">听说你有东西和我们说？来这留言叭~</p>
-        </div>
-
-        <!-- 卡片3 -->
-        <div class="card">
-            <a href="赞助.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
-                <img src="donate.svg" alt="赞助">
-                <h3 style="margin: 0; font-size: 20px;">请杯奶茶呗</h3>
-            </a>
-            <p style="margin: 5px 0; font-size: 16px;">学习一星期了，请我们喝杯奶茶叭，要补补脑子才可以继续设计哒。</p>
-        </div>
-
-        <!-- 卡片4 -->
-        <div class="card">
-            <a href="问题.html" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
-                <img src="question.svg" alt="问题">
-                <h3 style="margin: 0; font-size: 20px;">问题</h3>
-            </a>
-            <p style="margin: 5px 0; font-size: 16px;">你有什么疑问吗？这里解决哟~</p>
-        </div>
-    </div>
-
-    <!-- 公告栏分割线 -->
-    <div style="text-align: center; margin-top: 40px;">
-        <hr style="width: 66.67%; margin: 0 auto; border: 1px solid #ccc;">
-    </div>
-
     <!-- 公告栏 -->
-    <div style="text-align: left; margin-left: 360px; margin-top: 50px;">
-        <h2 style="font-weight: bold;">公告栏</h2>
-        <p style="margin: 10px 0;">
-            <span style="display: inline-block; width: 10px; height: 10px; background-color: black; border-radius: 50%; margin-right: 5px;"></span>
+    <div class="announcement">
+        <h2>公告栏</h2>
+        <p>
+            <span></span>
             教师定制PPT享受9折优惠，定制公开课课件享受8折优惠。
         </p>
-        <p style="margin: 10px 0;">
-            <span style="display: inline-block; width: 10px; height: 10px; background-color: black; border-radius: 50%; margin-right: 5px;"></span>
+        <p>
+            <span></span>
             放假啦，全天接单哟，优先选择左边的客服妹妹哟
         </p>
-        <p style="margin: 10px 0;">
-            <span style="display: inline-block; width: 10px; height: 10px; background-color: black; border-radius: 50%; margin-right: 5px;"></span>
-            目前网页还是纯前端，我们会快速完善的，敬请期待( •̀ ω •́ )✧！
+        <p>
+            <span></span>
+            目前网页还是纯前端，我们会快速完善的，敬请期待( •̀ ω •́ )✧
         </p>
     </div>
 </body>
-
 </html>
