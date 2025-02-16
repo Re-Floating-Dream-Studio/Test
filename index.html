@@ -122,27 +122,55 @@
             z-index: 1000;
         }
 
-        .navbar a {
-            text-decoration: none;
-            color: #333; /* 顶栏文字颜色 */
-            margin: 0 15px;
-            font-weight: bold;
-        }
-
-        .navbar img {
-            width: 20px;
-            vertical-align: middle;
-        }
-
-        .logo {
+        /* 左侧 Logo */
+        .navbar .logo {
             font-size: 24px;
             font-weight: bold;
             color: #333; /* 顶栏 Logo 颜色 */
         }
 
+        /* 中间四个选项 */
+        .navbar .nav-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1; /* 占据剩余空间 */
+            gap: 20px; /* 选项之间的间距 */
+            margin-left: -80px; /* 调整居中，减少左边距 */
+        }
+
+        .navbar .nav-center a {
+            text-decoration: none;
+            color: #333; /* 文字颜色 */
+            font-weight: bold;
+        }
+
+        .navbar .nav-center img {
+            width: 20px;
+            vertical-align: middle;
+        }
+
+        /* 右侧三个图标 */
+        .navbar .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* 图标之间的间距 */
+            margin-right: 25px; /* 减少右边距 */
+        }
+
+        .navbar .nav-right a {
+            text-decoration: none;
+            color: #333; /* 文字颜色 */
+        }
+
+        .navbar .nav-right img {
+            width: 20px;
+            vertical-align: mid
+            dle;
+        }
         /* 主界面样式 */
         .main-content {
-            padding: 100px 20px 40px;
+            padding: 200px 20px 40px; /* weizhi */
             text-align: center;
             position: relative;
             z-index: 10; /* 确保内容在背景模糊层之上 */
@@ -191,6 +219,7 @@
             font-size: 18px;
             transition: transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-decoration: none; /* 隐藏下划线 */
         }
 
         .button:hover {
@@ -202,55 +231,6 @@
             height: 25px;
             width: 25px;
             margin-right: 8px;
-        }
-
-        /* 卡片区域样式 */
-        .card-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 40px 20px;
-            position: relative;
-            z-index: 10; /* 确保内容在背景模糊层之上 */
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
-            border-radius: 15px;
-            padding: 20px;
-            width: 250px;
-            text-align: left;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(5px); /* 背景模糊效果 */
-            text-decoration: none; /* 去掉链接下划线 */
-            display: block; /* 使整个卡片可点击 */
-            color: inherit; /* 继承父元素文字颜色 */
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .card img {
-            height: 25px;
-            width: 25px;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
-
-        .card h3 {
-            margin: 0;
-            font-size: 20px;
-            color: #333; /* 标题颜色改为深色 */
-        }
-
-        .card p {
-            margin: 5px 0;
-            font-size: 16px;
-            color: #555; /* 段落文字颜色改为深灰色 */
         }
 
         /* 公告栏样式 */
@@ -426,13 +406,13 @@
     <!-- 顶栏 -->
     <div class="navbar">
         <div class="logo">Dreamirage</div>
-        <div>
+        <div class="nav-center">
             <a href="#"><img src="home-icon.png" alt="主页"> 主页</a>
             <a href="#"><img src="about-icon.png" alt="我们"> 我们</a>
             <a href="#"><img src="work-icon.png" alt="作品"> 作品</a>
             <a href="#"><img src="services-icon.png" alt="服务"> 服务</a>
         </div>
-        <div>
+        <div class="nav-right">
             <a href="https://github.com/Draemirage-Studio" target="_blank">
                 <img src="github-icon.png" alt="GitHub">
             </a>
@@ -441,7 +421,7 @@
             </a>
             <a href="info.html" target="_blank">
                 <img src="info-icon.png" alt="Info">
-            </a>   
+            </a>
         </div>
     </div>
 
@@ -462,37 +442,6 @@
                     <img src="about.svg" alt="我们">我们
                 </a>
             </div>
-        </div>
-
-        <!-- 卡片区域 -->
-        <div class="card-container">
-            <!-- 订购服务 -->
-            <a href="服务.html" class="card">
-                <img src="services.svg" alt="服务">
-                <h3>订购服务</h3>
-                <p>哦你要设计啊，来叭，点击预定服务。</p>
-            </a>
-
-            <!-- 留言板 -->
-            <a href="留言板.html" class="card">
-                <img src="messageboard.svg" alt="留言板">
-                <h3>留言板</h3>
-                <p>听说你有东西和我们说？来这留言叭~</p>
-            </a>
-
-            <!-- 请杯奶茶呗 -->
-            <a href="赞助.html" class="card">
-                <img src="donate.svg" alt="赞助">
-                <h3>请杯奶茶呗</h3>
-                <p>学习一星期了，请我们喝杯奶茶叭，要补补脑子才可以继续设计哒。</p>
-            </a>
-
-            <!-- 问题 -->
-            <a href="问题.html" class="card">
-                <img src="question.svg" alt="问题">
-                <h3>问题</h3>
-                <p>你有什么疑问吗？这里解决哟~</p>
-            </a>
         </div>
     </div>
 
