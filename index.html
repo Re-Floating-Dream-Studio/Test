@@ -259,8 +259,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            padding: 100px 20px 20px; /* 顶部留出顶栏高度 */
+            min-height: 90vh; /* 调整为90vh，使其适合大多数浏览器窗口 */
+            padding: 80px 20px 20px; /* 减少顶部padding */
             text-align: center;
             position: relative;
             z-index: 10; /* 确保内容在背景模糊层之上 */
@@ -274,7 +274,7 @@
         }
 
         .main-content .logo-container img {
-            height: 150px;
+            height: 120px; /* 减小logo图片高度 */
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
@@ -290,20 +290,20 @@
         }
 
         .main-content .welcome-text h1 {
-            font-size: 36px;
+            font-size: 32px; /* 减小标题字体大小 */
             margin: 0;
             color: #333;
         }
 
         .main-content .welcome-text p {
-            font-size: 18px;
+            font-size: 16px; /* 减小段落字体大小 */
             color: #555;
             margin: 10px 0 0;
         }
 
         .main-content .scroll-indicator {
             position: absolute;
-            bottom: 20px;
+            bottom: 10px; /* 调整滚动指示器位置 */
             left: 50%;
             transform: translateX(-50%);
             animation: bounce 2s infinite;
@@ -329,8 +329,8 @@
         /* 第二页样式 */
         .second-page {
             background-color: #f0f0f0;
-            min-height: 100vh;
-            padding: 100px 20px 20px; /* 顶部留出顶栏高度 */
+            min-height: 90vh; /* 调整为90vh，与主页保持一致 */
+            padding: 80px 20px 20px; /* 减少顶部padding */
             text-align: center;
             position: relative;
             z-index: 10;
