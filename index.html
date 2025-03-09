@@ -35,6 +35,9 @@
             min-height: 100vh;
             color: #333; /* 默认文字颜色为深色 */
             overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+            box-sizing: border-box;
         }
 
         /* 每个页面容器 */
@@ -122,9 +125,10 @@
             border-bottom: 1px solid rgba(221, 221, 221, 0.5); /* 半透明边框 */
             backdrop-filter: blur(5px); /* 背景模糊效果 */
             position: fixed;
-            width: 100%;
+            width: calc(100% - 40px); /* 减去padding的宽度 */
             top: 0;
             z-index: 1000;
+            box-sizing: border-box; /* 确保padding不会增加元素的总宽度 */
         }
 
         /* 左侧 Logo */
@@ -264,6 +268,10 @@
             text-align: center;
             position: relative;
             z-index: 10; /* 确保内容在背景模糊层之上 */
+            width: 100%;
+            box-sizing: border-box; /* 确保padding不会增加元素的总宽度 */
+            max-width: 100vw; /* 限制最大宽度为视口宽度 */
+            overflow-x: hidden; /* 防止水平滚动 */
         }
 
         .main-content .logo-container {
@@ -334,6 +342,10 @@
             text-align: center;
             position: relative;
             z-index: 10;
+            width: 100%;
+            box-sizing: border-box; /* 确保padding不会增加元素的总宽度 */
+            max-width: 100vw; /* 限制最大宽度为视口宽度 */
+            overflow-x: hidden; /* 防止水平滚动 */
         }
 
         /* 背景动画 */
@@ -475,6 +487,71 @@
                     -50vmax -40vmax;
             }
         }
+        /* 响应式设计 - 媒体查询 */
+        @media screen and (max-width: 1200px) {
+            .main-content .logo-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .main-content .welcome-text {
+                text-align: center;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 10px;
+                height: auto;
+            }
+            
+            .navbar .logo {
+                margin-bottom: 10px;
+            }
+            
+            .navbar .nav-center {
+                margin: 10px 0;
+                width: 100%;
+                justify-content: space-around;
+            }
+            
+            .navbar .nav-right {
+                margin-top: 10px;
+            }
+            
+            .main-content {
+                padding-top: 150px; /* 增加顶部padding以适应更高的导航栏 */
+            }
+            
+            .second-page {
+                padding-top: 150px;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .navbar .nav-center {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .navbar .nav-center a {
+                padding: 5px 10px;
+                font-size: 14px;
+            }
+            
+            .main-content .logo-container img {
+                height: 80px;
+            }
+            
+            .main-content .welcome-text h1 {
+                font-size: 24px;
+            }
+            
+            .main-content .welcome-text p {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -521,7 +598,7 @@
     </div>
 
     <!-- 主页 -->
-    <div class="page home">
+    <div class="page home" style="width: 100%; overflow-x: hidden;">
         <div class="main-content">
             <div class="logo-container">
                 <img src="big_logo.png" alt="Big Logo">
@@ -552,33 +629,79 @@
             secondPage.scrollIntoView({ behavior: 'smooth' });
         });
 
-        // 监听滚动事件，模拟弹性滚动效果
+        // 监听滚动事件，模拟弹性滚动效果和阻尼感
         let isScrolling = false;
+        let lastScrollTop = 0;
+        let scrollDirection = 0;
+        let resistanceZone = 100; // 阻力区域的像素高度
+        
         window.addEventListener('scroll', () => {
             if (isScrolling) return;
-            isScrolling = true;
-
+            
             const scrollTop = window.scrollY;
             const windowHeight = window.innerHeight;
             const homeHeight = document.querySelector('.home').offsetHeight;
             const secondPageTop = secondPage.offsetTop;
-
-            // 向下滚动到第二页
-            if (scrollTop < homeHeight / 2) {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            } else if (scrollTop < secondPageTop) {
-                window.scrollTo({
-                    top: homeHeight,
-                    behavior: 'smooth'
-                });
+            
+            // 确定滚动方向
+            scrollDirection = scrollTop > lastScrollTop ? 1 : -1; // 1表示向下，-1表示向上
+            lastScrollTop = scrollTop;
+            
+            // 检查是否在阻力区域内
+            const inDownResistanceZone = scrollTop > homeHeight - resistanceZone && scrollTop < homeHeight;
+            const inUpResistanceZone = scrollTop > homeHeight && scrollTop < homeHeight + resistanceZone;
+            
+            if ((inDownResistanceZone && scrollDirection > 0) || (inUpResistanceZone && scrollDirection < 0)) {
+                // 在阻力区域内，减缓滚动速度
+                isScrolling = true;
+                
+                // 创建阻尼效果
+                setTimeout(() => {
+                    // 根据方向决定滚动目标
+                    if (scrollDirection > 0) {
+                        // 向下滚动，滚到第二页
+                        window.scrollTo({
+                            top: homeHeight,
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        // 向上滚动，滚到第一页
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    }
+                    
+                    setTimeout(() => {
+                        isScrolling = false;
+                    }, 500);
+                }, 200); // 添加200ms延迟，模拟阻力感
+                
+                return;
             }
+            
+            // 常规滚动逻辑
+            if (!isScrolling) {
+                isScrolling = true;
+                
+                if (scrollTop < homeHeight / 2) {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                } else if (scrollTop < secondPageTop && scrollTop > homeHeight / 2) {
+                    window.scrollTo({
+                        top: homeHeight,
+                        behavior: 'smooth'
+                    });
+                }
+                
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 500); // 防抖处理
+            }
+        });
 
-            setTimeout(() => {
-                isScrolling = false;
-            }, 500); // 防抖处理
         });
     </script>
 </body>
