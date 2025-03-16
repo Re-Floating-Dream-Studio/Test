@@ -10,8 +10,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const storedVersion = localStorage.getItem('siteVersion');
             const hasVisited = localStorage.getItem('hasVisited');
             
+            // 添加调试信息
+            console.log('当前版本:', currentVersion);
+            console.log('存储版本:', storedVersion);
+            console.log('是否首次访问:', hasVisited ? '否' : '是');
+            
             // 检查是否是首次访问
             if (!hasVisited) {
+                console.log('首次访问，显示欢迎弹窗');
                 // 标记为已访问
                 localStorage.setItem('hasVisited', 'true');
                 // 存储当前版本
@@ -21,10 +27,13 @@ document.addEventListener('DOMContentLoaded', function() {
             } 
             // 检查版本是否变动（非首次访问）
             else if (storedVersion !== currentVersion) {
+                console.log('版本已更新，显示更新弹窗');
                 // 更新存储的版本号
                 localStorage.setItem('siteVersion', currentVersion);
                 // 显示更新提示
                 showUpdatePopup(currentVersion, data);
+            } else {
+                console.log('版本未变化，不显示弹窗');
             }
         })
         .catch(error => {
