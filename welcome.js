@@ -24,9 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('siteVersion', currentVersion);
                 // 创建欢迎弹窗
                 showWelcomePopup(currentVersion);
-            } 
-            // 检查版本是否变动（非首次访问）
-            else if (storedVersion !== currentVersion) {
+            }             // 检查版本是否变动（非首次访问）
+            else if (!storedVersion || storedVersion !== currentVersion) {
                 console.log('版本已更新，显示更新弹窗');
                 // 更新存储的版本号
                 localStorage.setItem('siteVersion', currentVersion);
@@ -40,6 +39,40 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('获取版本信息失败:', error);
         });
 });
+
+// 确保在页面加载完成后立即检查版本
+window.addEventListener('load', function() {
+    // 如果DOMContentLoaded事件已经触发但没有正确执行版本检查，这里提供一个备份机制
+    if (!document.body.classList.contains('version-checked')) {
+        console.log('使用备份机制检查版本');
+        checkVersion();
+    }
+});
+
+// 提取版本检查逻辑为单独函数，便于重用
+function checkVersion() {
+    document.body.classList.add('version-checked');
+    fetch('Update')
+        .then(response => response.text())
+        .then(data => {
+            const versionMatch = data.match(/Version:([^\n]+)/);
+            const currentVersion = versionMatch ? versionMatch[1].trim() : '未知版本';
+            const storedVersion = localStorage.getItem('siteVersion');
+            
+            console.log('备份检查 - 当前版本:', currentVersion);
+            console.log('备份检查 - 存储版本:', storedVersion);
+            
+            if (!storedVersion || storedVersion !== currentVersion) {
+                console.log('备份检查 - 版本不匹配，显示更新弹窗');
+                localStorage.setItem('siteVersion', currentVersion);
+                showUpdatePopup(currentVersion, data);
+            }
+        })
+        .catch(error => {
+            console.error('备份版本检查失败:', error);
+        });
+}
+
 
 function showWelcomePopup(version) {
     // 创建弹窗元素
