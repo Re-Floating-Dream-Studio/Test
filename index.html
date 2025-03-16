@@ -272,7 +272,6 @@
             width: 100%;
             box-sizing: border-box; 
             max-width: 100vw; 
-            overflow-x: hidden;
         }
 
         .main-content .logo-container {
@@ -312,10 +311,11 @@
 
         .main-content .scroll-indicator {
             position: absolute;
-            bottom: 10px; /* 调整滚动指示器位置 */
+            bottom: -25px;
             left: 50%;
             transform: translateX(-50%);
             animation: bounce 2s infinite;
+            z-index: 100;
         }
 
         .main-content .scroll-indicator img {
@@ -713,7 +713,7 @@
                 </div>
                 我们
             </a>
-            <a href="作品展示.html">
+            <a href="作品.html">
                 <div class="icon-container">
                     <img src="work-icon.png" alt="作品">
                 </div>
@@ -740,7 +740,7 @@
     </div>
 
     <!-- 主页 -->
-    <div class="page home" style="width: 100%; overflow-x: hidden;">
+    <div class="page home">
         <div class="main-content">
             <div class="logo-container">
                 <img src="big_logo.png" alt="Big Logo">
@@ -774,10 +774,8 @@
         let isScrolling = false;
         let scrollDirection = 0;
         
-        // 阻止默认滚动行为，实现分段式滑块效果
-        window.addEventListener('wheel', (event) => {
-            event.preventDefault(); // 阻止默认滚动行为
-            
+        // 处理滚动的函数，用于鼠标滚轮和空格键共用
+        function handleScroll(direction) {
             if (isScrolling) return; // 如果正在滚动中，不处理新的滚动事件
             
             const scrollTop = window.scrollY;
@@ -785,8 +783,8 @@
             const homeHeight = document.querySelector('.home').offsetHeight;
             const pages = document.querySelectorAll('.page');
             
-            // 确定滚动方向
-            scrollDirection = event.deltaY > 0 ? 1 : -1; // 1表示向下，-1表示向上
+            // 设置滚动方向
+            scrollDirection = direction;
             
             // 确定当前页面索引
             let currentPageIndex = 0;
@@ -796,7 +794,7 @@
             
             isScrolling = true;
             
-            // 短暂停顿后执行滚动（减少到150ms，提高响应速度）
+            // 短暂停顿后执行滚动
             setTimeout(() => {
                 // 计算目标页面
                 let targetPageIndex = currentPageIndex;
@@ -810,13 +808,33 @@
                 }
                 
                 // 滚动到目标页面，使用更快的滚动动画
-                pages[targetPageIndex].scrollIntoView({ behavior: 'smooth' });
+                window.scrollTo({
+                    top: pages[targetPageIndex].offsetTop,
+                    behavior: 'smooth'
+                });
 
                 setTimeout(() => {
                     isScrolling = false;
                 }, 700); 
             }, 100); 
-        }, { passive: false }); 
+        }
+        
+        // 阻止默认滚动行为，实现分段式滑块效果
+        window.addEventListener('wheel', (event) => {
+            event.preventDefault(); // 阻止默认滚动行为
+            // 确定滚动方向
+            const direction = event.deltaY > 0 ? 1 : -1; // 1表示向下，-1表示向上
+            handleScroll(direction);
+        }, { passive: false });
+        
+        // 添加空格键事件监听
+        window.addEventListener('keydown', (event) => {
+            // 检查是否按下空格键
+            if (event.code === 'Space' || event.key === ' ') {
+                event.preventDefault(); // 阻止默认滚动行为
+                handleScroll(1); // 空格键总是向下滚动
+            }
+        }); 
     </script>
     <!-- 导入欢迎弹窗脚本 -->
     <script src="welcome.js"></script>
