@@ -338,7 +338,7 @@
         /* 第二页样式 */
         .second-page {
             background-color: #f0f0f0;
-            min-height: 90vh; 
+            min-height: 100vh; 
             padding: 80px 20px 20px; 
             text-align: center;
             position: relative;
@@ -693,6 +693,8 @@
             }
         }
     </style>
+    <!-- 导入欢迎弹窗样式 -->
+    <link rel="stylesheet" href="welcome.css">
 </head>
 <body>
     <!-- 顶栏 -->
@@ -770,42 +772,54 @@
         });
 
         let isScrolling = false;
-        let lastScrollTop = 0;
         let scrollDirection = 0;
         
-        window.addEventListener('scroll', () => {
+        // 阻止默认滚动行为，实现分段式滑块效果
+        window.addEventListener('wheel', (event) => {
+            event.preventDefault(); // 阻止默认滚动行为
+            
             if (isScrolling) return; // 如果正在滚动中，不处理新的滚动事件
             
             const scrollTop = window.scrollY;
             const windowHeight = window.innerHeight;
             const homeHeight = document.querySelector('.home').offsetHeight;
+            const pages = document.querySelectorAll('.page');
             
             // 确定滚动方向
-            scrollDirection = scrollTop > lastScrollTop ? 1 : -1; // 1表示向下，-1表示向上
-            lastScrollTop = scrollTop;
-
+            scrollDirection = event.deltaY > 0 ? 1 : -1; // 1表示向下，-1表示向上
+            
+            // 确定当前页面索引
+            let currentPageIndex = 0;
+            if (scrollTop >= homeHeight / 2) {
+                currentPageIndex = 1;
+            }
+            
             isScrolling = true;
-
+            
+            // 短暂停顿后执行滚动（减少到150ms，提高响应速度）
             setTimeout(() => {
-                if (scrollDirection > 0) {
-                    window.scrollTo({
-                        top: homeHeight,
-                        behavior: 'smooth'
-                    });
-                } else {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
+                // 计算目标页面
+                let targetPageIndex = currentPageIndex;
+                
+                if (scrollDirection > 0 && currentPageIndex < pages.length - 1) {
+                    // 向下滚动到下一页
+                    targetPageIndex = currentPageIndex + 1;
+                } else if (scrollDirection < 0 && currentPageIndex > 0) {
+                    // 向上滚动到上一页
+                    targetPageIndex = currentPageIndex - 1;
                 }
                 
-                // 滚动完成后恢复可滚动状态
+                // 滚动到目标页面，使用更快的滚动动画
+                pages[targetPageIndex].scrollIntoView({ behavior: 'smooth' });
+
                 setTimeout(() => {
                     isScrolling = false;
-                }, 800); 
-            }, 400); // 0.4秒的停顿
-        });
+                }, 700); 
+            }, 100); 
+        }, { passive: false }); 
     </script>
+    <!-- 导入欢迎弹窗脚本 -->
+    <script src="welcome.js"></script>
 </body>
 </html>
                     
