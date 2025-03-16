@@ -73,3 +73,26 @@
 .welcome-content .close-btn:hover {
     color: #333;
 }
+
+/* 更新弹窗特定样式 */
+.update-popup .welcome-content {
+    max-width: 400px;
+}
+
+.update-popup .version-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.update-popup .update-content {
+    text-align: left;
+    max-height: 200px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.update-popup .update-content p {
+    margin: 8px 0;
+    line-height: 1.4;
+}
