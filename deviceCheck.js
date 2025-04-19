@@ -105,21 +105,33 @@ async function collectDeviceInfo() {
 
 // 生成设备指纹
 async function generateFingerprint() {
-    const deviceInfo = await collectDeviceInfo();
-    const infoString = JSON.stringify(deviceInfo);
-    let fingerprint = await sha256(infoString);
-    
-    // 移除下划线和特殊符号（如果需要）
-    fingerprint = fingerprint.replace(/[_\-]/g, '');
-    
-    debug('生成的设备指纹:', fingerprint);
-    return fingerprint;
+    try {
+        const deviceInfo = await collectDeviceInfo();
+        const infoString = JSON.stringify(deviceInfo);
+        let fingerprint = await sha256(infoString);
+        
+        // 移除下划线和特殊符号（如果需要）
+        fingerprint = fingerprint.replace(/[_\-]/g, '');
+        
+        debug('生成的设备指纹:', fingerprint);
+        
+        // 验证指纹是否有效
+        if (!fingerprint || fingerprint.length < 8) {
+            debug('无法生成有效的设备指纹');
+            return null;
+        }
+        
+        return fingerprint;
+    } catch (error) {
+        debug('生成设备指纹时出错:', error);
+        return null;
+    }
 }
 
 // 清理指纹字符串，移除分号、空格等
 function cleanFingerprint(fp) {
     if (!fp) return '';
-    return fp.trim().replace(/;$/, ''); // 移除末尾分号
+    return fp.trim().replace(/;$/, '').replace(/\s+/g, ''); // 移除末尾分号和所有空白字符
 }
 
 // 从KEY文件加载指纹列表
@@ -170,7 +182,9 @@ async function loadFingerprintList() {
                 // 移除开头的感叹号，加入禁止列表
                 const blockedFingerprint = processedLine.substring(1);
                 debug(`- 添加到禁止列表: "${blockedFingerprint}"`);
-                blocked.push(blockedFingerprint);
+                if (blockedFingerprint.trim() !== '') {
+                    blocked.push(blockedFingerprint);
+                }
             } else if (processedLine !== '') {
                 debug(`- 添加到允许列表: "${processedLine}"`);
                 allowed.push(processedLine);
@@ -194,6 +208,14 @@ async function checkDeviceAccess() {
         
         // 1. 生成当前设备的指纹
         const fingerprint = await generateFingerprint();
+        
+        // 如果无法生成有效指纹，则不提供服务
+        if (!fingerprint) {
+            debug('无法获取有效的设备指纹，跳转到noserve.html');
+            window.location.href = 'noserve.html';
+            return;
+        }
+        
         debug('当前设备指纹:', fingerprint);
         
         // 2. 加载指纹列表
@@ -214,23 +236,30 @@ async function checkDeviceAccess() {
         }
         
         // 4. 检查是否在允许列表中（精确匹配）
-        const isAllowed = allowed.some(item => {
-            const cleanItem = cleanFingerprint(item);
-            const match = cleanItem === fingerprint;
-            if (match) debug(`指纹在允许列表中匹配: "${cleanItem}"`);
-            return match;
-        });
-        
-        if (isAllowed) {
-            debug('设备指纹验证通过，允许访问');
-            return;
+        if (allowed.length > 0) {
+            const isAllowed = allowed.some(item => {
+                const cleanItem = cleanFingerprint(item);
+                const match = cleanItem === fingerprint;
+                if (match) debug(`指纹在允许列表中匹配: "${cleanItem}"`);
+                return match;
+            });
+            
+            if (isAllowed) {
+                debug('设备指纹验证通过，允许访问');
+                return;
+            }
+            
+            // 如果允许列表不为空但指纹不在其中，不提供服务
+            debug('设备指纹未在允许列表中，跳转到noserve.html');
+            window.location.href = 'noserve.html';
+        } else {
+            // 如果允许列表为空且不在禁止列表中，默认允许访问
+            debug('允许列表为空且设备未被封禁，允许访问');
         }
-        
-        // 5. 如果既不在禁止列表也不在允许列表，跳转到noserve.html
-        debug('设备指纹未被授权，跳转到noserve.html');
-        window.location.href = 'noserve.html';
     } catch (error) {
         debug('设备指纹检查过程中出错:', error);
+        // 如果检查过程出错，不提供服务
+        window.location.href = 'noserve.html';
     }
 }
 
