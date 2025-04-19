@@ -38,12 +38,12 @@
             width: 100%;
             max-width: 100vw;
             box-sizing: border-box;
+            animation: fadeInPage 0.5s ease-in-out; /* 添加淡入动画 */
         }
 
         /* 顶栏样式 */
         .navbar {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
             background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
@@ -55,6 +55,7 @@
             left: 0; /* 确保左边没有间隙 */
             z-index: 1000;
             box-sizing: border-box; /* 确保padding不会增加元素的总宽度 */
+            margin: 0; /* 确保没有外边距 */
         }
 
         /* 左侧 Logo */
@@ -70,8 +71,9 @@
             justify-content: center; /* 水平居中 */
             align-items: center; /* 垂直居中 */
             gap: 20px; /* 设置选项之间的间距 */
-            flex: 1; /* 占据剩余空间 */
-            margin: 0 20px; /* 左右留出间距 */
+            margin-left: auto; /* 使其在 flex 容器中向右推 */
+            margin-right: auto; /* 使其在 flex 容器中向左推 */
+            height: 100%; /* 保证高度一致 */
         }
 
         /* 中间选项样式 */
@@ -189,6 +191,9 @@
                 flex-direction: column;
                 padding: 10px;
                 height: auto;
+                width: 100%;
+                left: 0;
+                box-sizing: border-box;
             }
             
             .navbar .logo {
@@ -201,6 +206,7 @@
                 width: 100%;
                 justify-content: space-around;
                 flex-wrap: wrap;
+                height: auto;
             }
             
             .navbar .nav-right {
@@ -208,11 +214,20 @@
             }
         }
     </style>
+    <!-- 添加页面淡入动画 -->
+    <style>
+        @keyframes fadeInPage {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
     <!-- 顶栏 -->
     <div class="navbar">
-        <div class="logo">Dreamirage</div>
+        <a href="index.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">Dreamirage</div>
+        </a>
         <div class="nav-center">
             <a href="index.html">
                 <div class="icon-container">
@@ -253,8 +268,410 @@
     </div>
 
     <!-- 页面内容 -->
-    <div style="padding-top: 80px;">
-        <!-- 这里是空白内容 -->
+    <div class="about-content" style="padding-top: 80px;">
+        <!-- 大标志 -->
+        <div class="big-logo-container">
+            <img src="big_logo.png" alt="Dreamirage Logo" class="big-logo">
+        </div>
+        
+        <!-- 两个工作室展示区 -->
+        <div class="studios-container">
+            <!-- Dream Studio 部分 -->
+            <div class="studio-section dream-studio">
+                <img src="Dream Studio LOGO.png" alt="Dream Studio Logo" class="studio-logo">
+                <div class="tabs-container">
+                    <div class="tab active" data-tab="dream-intro">简介</div>
+                    <div class="tab" data-tab="dream-team">团队</div>
+                    <div class="tab" data-tab="dream-projects">项目</div>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="dream-intro">
+                        <h3>Dream Studio 简介</h3>
+                        <p>Dream Studio 是 Dreamirage 旗下专注于软件的工作室。成立与 2021 年 8 月，全名：Re. Floating Dream Studio。</p>
+                    </div>
+                    <div class="tab-pane" id="dream-team">
+                        <h3>Dream Studio 团队</h3>
+                        <!-- 成员卡片-->
+                        <a href="studio/ds-aflydream.html" class="member-card">
+                            <img src="Atech1.png" alt="Avatar" class="member-avatar">
+                            <div class="member-info">
+                                <div class="member-name">Aflydream</div>
+                                <div class="member-role">身份：Dream Studio室长</div>
+                                <div class="member-desc">一直猫</div>
+                            </div>
+                        </a>
+                        <a href="studio/ds-aflydream.html" class="member-card">
+                            <img src="Atech1.png" alt="Avatar" class="member-avatar">
+                            <div class="member-info">
+                                <div class="member-name">Aflydream</div>
+                                <div class="member-role">身份：Dream Studio室长</div>
+                                <div class="member-desc">一只不怎么样的猫</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="tab-pane" id="dream-projects">
+                        <h3>Dream Studio 项目</h3>
+                        <p>主持编写 Dreamirage Tools 网站</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mirage Studio 部分 -->
+            <div class="studio-section mirage-studio">
+                <img src="Mirage Studio LOGO.png" alt="Mirage Studio Logo" class="studio-logo">
+                <div class="tabs-container">
+                    <div class="tab active" data-tab="mirage-intro">简介</div>
+                    <div class="tab" data-tab="mirage-team">团队</div>
+                    <div class="tab" data-tab="mirage-projects">项目</div>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="mirage-intro">
+                        <h3>Mirage Studio 简介</h3>
+                        <p>Mirage Studio 是 Dreamirage 旗下专注于技术研发与创新的工作室。我们专注于将前沿技术与创意结合，开发具有创新性和实用性的数字产品和解决方案。</p>
+                    </div>
+                    <div class="tab-pane" id="mirage-team">
+                        <h3>Mirage Studio 团队</h3>
+                        <!-- 成员卡片 -->
+                        <a href="studio/ds-aflydream.html" class="member-card">
+                            <img src="Atech1.png" alt="Avatar" class="member-avatar">
+                            <div class="member-info">
+                                <div class="member-name">Aflydream</div>
+                                <div class="member-role">身份：Dream Studio室长</div>
+                                <div class="member-desc">一直猫 1</div>
+                            </div>
+                        </a>
+                         <a href="studio/ds-aflydream.html" class="member-card">
+                            <img src="Atech1.png" alt="Avatar" class="member-avatar">
+                            <div class="member-info">
+                                <div class="member-name">Aflydream</div>
+                                <div class="member-role">身份：Dream Studio室长</div>
+                                <div class="member-desc">一直猫 2</div>
+                            </div>
+                        </a>
+                         <a href="studio/ds-aflydream.html" class="member-card">
+                            <img src="Atech1.png" alt="Avatar" class="member-avatar">
+                            <div class="member-info">
+                                <div class="member-name">Aflydream</div>
+                                <div class="member-role">身份：Dream Studio室长</div>
+                                <div class="member-desc">一直猫 3</div>
+                            </div>
+                        </a>
+                         <a href="studio/ds-aflydream.html" class="member-card">
+                            <img src="Atech1.png" alt="Avatar" class="member-avatar">
+                            <div class="member-info">
+                                <div class="member-name">Aflydream</div>
+                                <div class="member-role">身份：Dream Studio室长</div>
+                                <div class="member-desc">一直猫 4</div>
+                            </div>
+                        </a>
+                         <a href="studio/ds-aflydream.html" class="member-card">
+                            <img src="Atech1.png" alt="Avatar" class="member-avatar">
+                            <div class="member-info">
+                                <div class="member-name">Aflydream</div>
+                                <div class="member-role">身份：Dream Studio室长</div>
+                                <div class="member-desc">一直猫 5</div>
+                            </div>
+                        </a>
+                         <a href="studio/ds-aflydream.html" class="member-card">
+                            <img src="Atech1.png" alt="Avatar" class="member-avatar">
+                            <div class="member-info">
+                                <div class="member-name">Aflydream</div>
+                                <div class="member-role">身份：Dream Studio室长</div>
+                                <div class="member-desc">一直猫 6</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="tab-pane" id="mirage-projects">
+                        <h3>Mirage Studio 项目</h3>
+                        <p>我们的项目涵盖多个领域，包括互动体验设计、数字艺术创作、智能应用开发等。每个项目都体现了我们对技术与艺术结合的追求，以及对用户体验的极致关注。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!-- 添加页面样式 -->
+    <style>
+        /* 关于我们页面样式 */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: calc(100vh - 80px); /* Use min-height instead to ensure it takes at least screen height */
+            box-sizing: border-box;
+        }
+
+        /* 大标志样式 */
+        .big-logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+            flex-shrink: 0;
+        }
+
+        .big-logo {
+            max-width: 300px;
+            height: auto;
+            transition: transform 0.5s ease;
+        }
+
+        .big-logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* 工作室展示区样式 */
+        .studios-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            flex-wrap: wrap;
+            gap: 30px;
+            flex-grow: 1; /* Still allow container to grow vertically */
+        }
+
+        .studio-section {
+            flex: 1 1 300px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-height: 0;
+            max-height: 75vh;
+            height: 400px; /* 固定高度，确保选项卡切换时高度不变 */
+        }
+
+        .studio-section:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .studio-logo {
+            max-width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .studio-logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* 外部选项卡样式 */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            flex-shrink: 0;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #666;
+            position: relative;
+            transition: all 0.3s ease;
+            white-space: nowrap; /* 防止文字换行 */
+        }
+
+        .tab:hover {
+            color: #333;
+        }
+
+        .tab.active {
+            color: #333;
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #333;
+            border-radius: 3px 3px 0 0;
+        }
+
+        /* 选项卡内容样式 (Scrolling Area) */
+        .tab-content {
+             flex-grow: 1;
+             overflow-y: auto;
+             padding: 10px 5px 10px 15px;
+             min-height: 0;
+             height: calc(100% - 70px); /* 固定高度，留出空间给标题和选项卡 */
+        }
+
+        /* 隐藏滚动条但保持滚动功能 (Webkit) */
+        .tab-content::-webkit-scrollbar {
+            width: 6px; /* 滚动条宽度 */
+        }
+
+        .tab-content::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.03);
+            border-radius: 3px;
+        }
+
+        .tab-content::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.2); /* 滚动条滑块颜色 */
+            border-radius: 3px;
+        }
+
+        .tab-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(0,0,0,0.3); /* 鼠标悬停时滑块颜色 */
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-pane h3 {
+            margin-top: 0;
+            color: #333;
+            font-size: 1.3rem; /* Slightly smaller heading */
+            margin-bottom: 10px; /* Reduced margin */
+            padding-right: 5px; /* Prevent heading text from touching scrollbar */
+        }
+
+        .tab-pane p {
+            line-height: 1.6;
+            color: #555;
+            padding-right: 5px; /* Prevent paragraph text from touching scrollbar */
+        }
+
+        /* 成员卡片样式 */
+        .member-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            background-color: rgba(0,0,0,0.02);
+            border-radius: 12px; /* 增加圆角 */
+            margin-bottom: 12px;
+            margin-right: 5px;
+            transition: all 0.3s ease; /* 添加过渡效果 */
+            text-decoration: none; /* 移除链接下划线 */
+            color: inherit; /* 继承文字颜色 */
+            cursor: pointer; /* 显示为可点击 */
+        }
+        
+        .member-card:hover {
+            transform: translateY(-5px); /* 鼠标悬停时上浮 */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* 添加阴影 */
+            background-color: rgba(0,0,0,0.03); /* 轻微改变背景色 */
+        }
+
+        .member-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%; /* 圆形头像 */
+            object-fit: cover; /* 保持图片比例 */
+            flex-shrink: 0; /* 防止头像被压缩 */
+            border: 2px solid #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .member-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px; /* 文本行间距 */
+        }
+
+        .member-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .member-role {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .member-desc {
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        /* 响应式设计 */
+        @media screen and (max-width: 768px) {
+             .about-content {
+                 min-height: auto; /* Remove min-height on mobile */
+                 height: auto;
+                 overflow: visible;
+             }
+             .studios-container {
+                flex-direction: column;
+                gap: 30px;
+                flex-grow: 0;
+                overflow: visible;
+            }
+            .studio-section {
+                overflow: visible;
+                max-height: none;
+                height: auto; /* 移动端取消固定高度 */
+            }
+            .tab-content {
+                 overflow-y: visible;
+                 padding-left: 0;
+                 height: auto; /* 移动端取消固定高度 */
+            }
+            .tab-pane h3,
+            .tab-pane p,
+            .member-card {
+                 margin-right: 0; /* No scrollbar space needed */
+             }
+        }
+    </style>
+
+    <!-- 添加JavaScript以实现选项卡功能 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 处理外部选项卡
+            const studioSections = document.querySelectorAll('.studio-section');
+            studioSections.forEach(studioSection => {
+                const tabs = studioSection.querySelectorAll('.tabs-container .tab');
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        // 移除同一工作室区域内所有外部选项卡的active类
+                        studioSection.querySelectorAll('.tabs-container .tab').forEach(t => {
+                            t.classList.remove('active');
+                        });
+                        // 为当前点击的外部选项卡添加active类
+                        this.classList.add('active');
+
+                        // 获取要显示的内容ID
+                        const tabId = this.getAttribute('data-tab');
+                        // 隐藏同一工作室区域内所有外部内容
+                        studioSection.querySelectorAll('.tab-content .tab-pane').forEach(pane => {
+                            pane.classList.remove('active');
+                        });
+                        // 显示对应的外部内容
+                        const targetPane = studioSection.querySelector(`.tab-content #${tabId}`);
+                        if (targetPane) {
+                            targetPane.classList.add('active');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>

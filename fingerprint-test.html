@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设备指纹测试工具</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .fingerprint {
+            font-family: monospace;
+            word-break: break-all;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .formats {
+            margin-top: 20px;
+        }
+        .note {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff9c4;
+            border-left: 4px solid #ffeb3b;
+        }
+    </style>
+</head>
+<body>
+    <h1>设备指纹测试工具</h1>
+    <p>点击按钮生成当前设备的指纹，可以直接复制到KEY.txt文件中</p>
+    
+    <button id="generateBtn">生成设备指纹</button>
+    <button id="copyBtn" disabled>复制到剪贴板</button>
+    
+    <div class="result" id="result" style="display:none;">
+        <h3>当前设备指纹:</h3>
+        <div class="fingerprint" id="fingerprint"></div>
+        
+        <div class="formats">
+            <h3>可用的格式:</h3>
+            <p><strong>允许访问:</strong></p>
+            <div class="fingerprint" id="allowFormat"></div>
+            
+            <p><strong>禁止访问:</strong></p>
+            <div class="fingerprint" id="blockFormat"></div>
+        </div>
+    </div>
+    
+    <div class="note">
+        <h3>如何使用:</h3>
+        <ol>
+            <li>点击"生成设备指纹"按钮</li>
+            <li>复制"允许访问"或"禁止访问"格式的指纹</li>
+            <li>将复制的内容粘贴到passkey/KEY.txt文件中</li>
+            <li>每个指纹占一行</li>
+        </ol>
+    </div>
+
+    <script>
+        // SHA-256 哈希函数
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+
+        // 获取设备信息
+        async function getMacAddresses() {
+            if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+                return "不支持获取网络设备信息";
+            }
+            
+            try {
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                return devices.map(device => device.deviceId).join('');
+            } catch (e) {
+                return "获取设备信息失败: " + e.toString();
+            }
+        }
+
+        function getCanvasFingerprint() {
+            try {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = 200;
+                canvas.height = 50;
+                
+                ctx.textBaseline = "top";
+                ctx.font = "14px 'Arial'";
+                ctx.textBaseline = "alphabetic";
+                ctx.fillStyle = "#f60";
+                ctx.fillRect(125, 1, 62, 20);
+                ctx.fillStyle = "#069";
+                ctx.fillText("设备指纹Canvas", 2, 15);
+                ctx.fillStyle = "rgba(102, 204, 0, 0.7)";
+                ctx.fillText("设备指纹Canvas", 4, 17);
+                
+                return canvas.toDataURL();
+            } catch (e) {
+                return "Canvas指纹获取失败";
+            }
+        }
+
+        function getWebGLFingerprint() {
+            try {
+                const canvas = document.createElement('canvas');
+                const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                if (!gl) return "WebGL不可用";
+                
+                const info = {
+                    vendor: gl.getParameter(gl.VENDOR),
+                    renderer: gl.getParameter(gl.RENDERER),
+                    version: gl.getParameter(gl.VERSION)
+                };
+                
+                return JSON.stringify(info);
+            } catch (e) {
+                return "WebGL指纹获取失败";
+            }
+        }
+
+        async function collectDeviceInfo() {
+            const deviceInfo = {
+                userAgent: navigator.userAgent,
+                language: navigator.language,
+                platform: navigator.platform,
+                hardwareConcurrency: navigator.hardwareConcurrency,
+                screenResolution: `${window.screen.width}x${window.screen.height}`,
+                screenColorDepth: window.screen.colorDepth,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                timezoneOffset: new Date().getTimezoneOffset(),
+                localStorage: !!window.localStorage,
+                sessionStorage: !!window.sessionStorage,
+                cookieEnabled: navigator.cookieEnabled,
+                doNotTrack: navigator.doNotTrack,
+                plugins: Array.from(navigator.plugins || []).map(p => p.name).join(';'),
+                canvas: getCanvasFingerprint(),
+                webgl: getWebGLFingerprint(),
+                deviceIds: await getMacAddresses()
+            };
+            
+            return deviceInfo;
+        }
+
+        // 生成设备指纹
+        async function generateFingerprint() {
+            const deviceInfo = await collectDeviceInfo();
+            const infoString = JSON.stringify(deviceInfo);
+            let fingerprint = await sha256(infoString);
+            
+            // 移除下划线和特殊符号（如果需要）
+            fingerprint = fingerprint.replace(/[_\-]/g, '');
+            
+            return fingerprint;
+        }
+        
+        // 绑定按钮事件
+        document.getElementById('generateBtn').addEventListener('click', async () => {
+            const fingerprint = await generateFingerprint();
+            
+            // 显示指纹
+            document.getElementById('fingerprint').textContent = fingerprint;
+            document.getElementById('allowFormat').textContent = fingerprint;
+            document.getElementById('blockFormat').textContent = '!' + fingerprint;
+            
+            // 显示结果区域
+            document.getElementById('result').style.display = 'block';
+            
+            // 启用复制按钮
+            document.getElementById('copyBtn').disabled = false;
+        });
+        
+        // 复制按钮
+        document.getElementById('copyBtn').addEventListener('click', () => {
+            const fingerprint = document.getElementById('fingerprint').textContent;
+            navigator.clipboard.writeText(fingerprint).then(() => {
+                alert('已复制到剪贴板!');
+            }).catch(err => {
+                console.error('复制失败:', err);
+                alert('复制失败，请手动复制');
+            });
+        });
+    </script>
+</body>
+</html> 

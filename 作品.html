@@ -38,12 +38,12 @@
             width: 100%;
             max-width: 100vw;
             box-sizing: border-box;
+            animation: fadeInPage 0.5s ease-in-out; /* 添加淡入动画 */
         }
 
         /* 顶栏样式 */
         .navbar {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
             background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
@@ -55,6 +55,7 @@
             left: 0; /* 确保左边没有间隙 */
             z-index: 1000;
             box-sizing: border-box; /* 确保padding不会增加元素的总宽度 */
+            margin: 0; /* 确保没有外边距 */
         }
 
         /* 左侧 Logo */
@@ -70,8 +71,9 @@
             justify-content: center; /* 水平居中 */
             align-items: center; /* 垂直居中 */
             gap: 20px; /* 设置选项之间的间距 */
-            flex: 1; /* 占据剩余空间 */
-            margin: 0 20px; /* 左右留出间距 */
+            margin-left: auto; /* 使其在 flex 容器中向右推 */
+            margin-right: auto; /* 使其在 flex 容器中向左推 */
+            height: 100%; /* 保证高度一致 */
         }
 
         /* 中间选项样式 */
@@ -189,6 +191,9 @@
                 flex-direction: column;
                 padding: 10px;
                 height: auto;
+                width: 100%;
+                left: 0;
+                box-sizing: border-box;
             }
             
             .navbar .logo {
@@ -201,6 +206,7 @@
                 width: 100%;
                 justify-content: space-around;
                 flex-wrap: wrap;
+                height: auto;
             }
             
             .navbar .nav-right {
@@ -208,11 +214,20 @@
             }
         }
     </style>
+    <!-- 添加页面淡入动画 -->
+    <style>
+        @keyframes fadeInPage {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
     <!-- 顶栏 -->
     <div class="navbar">
-        <div class="logo">Dreamirage</div>
+        <a href="index.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">Dreamirage</div>
+        </a>
         <div class="nav-center">
             <a href="index.html">
                 <div class="icon-container">
@@ -254,7 +269,11 @@
 
     <!-- 页面内容 -->
     <div style="padding-top: 80px;">
-        <!-- 这里是空白内容 -->
+        <!-- 作品页面内容将在后续添加 -->
+        <div style="text-align: center; padding: 50px 20px;">
+            <h2 style="color: #333; margin-bottom: 30px;">作品展示</h2>
+            <p style="color: #666; max-width: 800px; margin: 0 auto;">作品内容正在精心准备中，敬请期待...</p>
+        </div>
     </div>
 </body>
 </html>

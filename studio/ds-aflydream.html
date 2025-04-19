@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aflydream - 个人主页</title>
+    <!-- 添加任务栏图标 -->
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+    <!-- 导入 MiSans 字体 -->
+    <style>
+        @font-face {
+            font-family: 'MiSans';
+            src: url('../fonts/MiSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'MiSans';
+            src: url('../fonts/MiSans-Bold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+    </style>
+    <style>
+        /* 基础样式 */
+        :root {
+            --background-color: #f6f8fa;
+            --text-color: #24292e;
+            --border-color: #e1e4e8;
+            --hover-color: #f1f1f1;
+            --accent-color: #0366d6;
+            --light-accent-color: #f1f8ff;
+            --gray-text: #586069;
+            --green: #28a745;
+        }
+
+        body {
+            font-family: 'MiSans', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            padding-top: 60px; /* 添加顶部内边距，为固定顶栏留出空间 */
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.5;
+            animation: fadeInPage 0.5s ease-in-out;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 导航栏样式 - 从 index.html 复制并调整 */
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
+            border-bottom: 1px solid rgba(221, 221, 221, 0.5); /* 半透明边框 */
+            backdrop-filter: blur(5px); /* 背景模糊效果 */
+            position: fixed;
+            width: 100%; /* 修改为100%，不再使用calc计算 */
+            top: 0;
+            left: 0; /* 确保左边没有间隙 */
+            z-index: 1000;
+            box-sizing: border-box; /* 确保padding不会增加元素的总宽度 */
+            margin: 0; /* 确保没有外边距 */
+        }
+
+        /* 左侧 Logo */
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333; /* 顶栏 Logo 颜色 */
+        }
+
+        /* 中间四个选项 */
+        .navbar .nav-center {
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+            gap: 20px; /* 设置选项之间的间距 */
+            margin-left: auto; /* 使其在 flex 容器中向右推 */
+            margin-right: auto; /* 使其在 flex 容器中向左推 */
+            height: 100%; /* 保证高度一致 */
+        }
+
+        /* 中间选项样式 */
+        .navbar .nav-center a {
+            text-decoration: none;
+            color: #333; /* 文字颜色 */
+            font-weight: bold;
+            position: relative;
+            padding: 10px 15px; /* 增加内边距，方便圆角块显示 */
+            transition: all 0.3s ease; /* 添加过渡效果 */
+            display: inline-flex; /* 保持横向排列 */
+            align-items: center; /* 图标和文字垂直居中 */
+            gap: 8px; /* 图标和文字之间的间距 */
+        }
+
+        /* 圆角块效果 */
+        .navbar .nav-center a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.1); /* 圆角块背景色 */
+            border-radius: 10px; /* 圆角 */
+            transform: translate(-50%, -50%) scale(0); /* 初始状态为缩小 */
+            transition: all 0.3s ease; /* 过渡效果 */
+            z-index: -1; /* 置于文字和图标下方 */
+        }
+
+        /* 鼠标悬停时显示圆角块 */
+        .navbar .nav-center a:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* 图标容器 */
+        .navbar .nav-center a .icon-container {
+            position: relative;
+            width: 20px;
+            height: 20px;
+        }
+
+        /* 原图标 */
+        .navbar .nav-center a .icon-container img {
+            width: 100%;
+            height: 100%;
+            transition: all 0.3s ease; /* 添加过渡效果 */
+        }
+
+        /* 新图标 */
+        .navbar .nav-center a .icon-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            opacity: 0; /* 初始状态为隐藏 */
+            transition: all 0.3s ease; /* 过渡效果 */
+        }
+
+        /* 为每个选项设置不同的新图标 - 路径调整为 ../ */
+        .navbar .nav-center a[href="../index.html"] .icon-container::after {
+            background-image: url('../icon1.png'); /* 主页图标 */
+        }
+
+        .navbar .nav-center a[href="../我们.html"] .icon-container::after {
+            background-image: url('../icon2.png'); /* 我们图标 */
+        }
+
+        .navbar .nav-center a[href="../作品.html"] .icon-container::after {
+            background-image: url('../icon3.png'); /* 作品图标 */
+        }
+
+        .navbar .nav-center a[href="../服务.html"] .icon-container::after {
+            background-image: url('../icon4.png'); /* 服务图标 */
+        }
+
+        /* 鼠标悬停时隐藏原图标，显示新图标 */
+        .navbar .nav-center a:hover .icon-container img {
+            opacity: 0; /* 隐藏原图标 */
+        }
+
+        .navbar .nav-center a:hover .icon-container::after {
+            opacity: 1; /* 显示新图标 */
+        }
+
+        /* 右侧三个图标 */
+        .navbar .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* 图标之间的间距 */
+        }
+
+        .navbar .nav-right a {
+            text-decoration: none;
+            color: #333; /* 文字颜色 */
+        }
+
+        .navbar .nav-right img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar .nav-right a:hover img {
+            transform: scale(1.2); /* 鼠标悬停时放大图标 */
+        }
+
+        /* 个人资料区域 */
+        .profile-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            gap: 30px;
+        }
+
+        .profile-sidebar {
+            flex: 0 0 300px;
+        }
+
+        .profile-main {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .profile-avatar {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            object-fit: cover;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-name {
+            font-size: 26px;
+            font-weight: bold;
+            margin-top: 16px;
+            margin-bottom: 0;
+        }
+
+        .profile-username {
+            font-size: 20px;
+            color: var(--gray-text);
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+
+        .profile-bio {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .profile-status {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: var(--gray-text);
+        }
+
+        .profile-status svg {
+            margin-right: 5px;
+            fill: currentColor;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: #fafbfc;
+            color: var(--text-color);
+            transition: 0.2s ease;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 16px;
+        }
+
+        .btn:hover {
+            background-color: #f3f4f6;
+            text-decoration: none;
+        }
+
+        /* 项目卡片 */
+        .repo-container {
+            margin-top: 25px;
+        }
+
+        .repo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+        }
+
+        .repo-title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .repo-card {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 16px;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        .repo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .repo-name {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .repo-description {
+            margin: 8px 0;
+            color: var(--gray-text);
+            font-size: 14px;
+        }
+
+        .repo-stats {
+            display: flex;
+            gap: 16px;
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--gray-text);
+        }
+
+        .repo-stats-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .repo-stats-item svg {
+            margin-right: 4px;
+        }
+
+        /* 活动图表 */
+        .activity-chart {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: white;
+            padding: 16px;
+            margin-top: 24px;
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(52, 1fr);
+            grid-auto-rows: 1fr;
+            grid-gap: 3px;
+            margin-top: 8px;
+        }
+
+        .activity-day {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            background-color: #ebedf0;
+        }
+
+        .activity-day.level-1 { background-color: #9be9a8; }
+        .activity-day.level-2 { background-color: #40c463; }
+        .activity-day.level-3 { background-color: #30a14e; }
+        .activity-day.level-4 { background-color: #216e39; }
+
+        /* 贡献栏和基本信息 */
+        .contributions, .achievements {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .achievements-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .achievement-badge {
+            background-color: var(--light-accent-color);
+            color: var(--accent-color);
+            border-radius: 20px;
+            padding: 4px 10px;
+            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .achievement-badge svg {
+            margin-right: 4px;
+        }
+
+        /* 页脚 */
+        .footer {
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+            padding: 40px 0;
+            color: var(--gray-text);
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .profile-container {
+                flex-direction: column;
+            }
+            
+            .profile-sidebar {
+                flex: none;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .profile-avatar {
+                width: 150px;
+                height: 150px;
+                margin: 0 auto;
+            }
+            
+            .activity-grid {
+                grid-template-columns: repeat(26, 1fr);
+            }
+        }
+
+        /* 页面淡入动画 */
+        @keyframes fadeInPage {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 - 从 index.html 复制并调整路径 -->
+    <div class="navbar">
+        <a href="../index.html" style="text-decoration: none; color: inherit;">
+            <div class="logo">Dreamirage</div>
+        </a>
+        <div class="nav-center">
+            <a href="../index.html">
+                <div class="icon-container">
+                    <img src="../home-icon.png" alt="主页">
+                </div>
+                主页
+            </a>
+            <a href="../我们.html">
+                <div class="icon-container">
+                    <img src="../about-icon.png" alt="我们">
+                </div>
+                我们
+            </a>
+            <a href="../作品.html">
+                <div class="icon-container">
+                    <img src="../work-icon.png" alt="作品">
+                </div>
+                作品
+            </a>
+            <a href="../服务.html">
+                <div class="icon-container">
+                    <img src="../services-icon.png" alt="服务">
+                </div>
+                服务
+            </a>
+        </div>
+        <div class="nav-right">
+            <a href="https://github.com/Draemirage-Studio" target="_blank">
+                <img src="../github-icon.png" alt="GitHub">
+            </a>
+            <a href="https://www.bilibili.com" target="_blank">
+                <img src="../camera-icon.png" alt="Camera">
+            </a>
+            <a href="../info.html" target="_blank">
+                <img src="../info-icon.png" alt="Info">
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="profile-container">
+            <!-- 侧边栏 -->
+            <div class="profile-sidebar">
+                <img src="../Atech1.png" alt="Aflydream" class="profile-avatar">
+                <h1 class="profile-name">Aflydream</h1>
+                <p class="profile-username">@aflydream</p>
+                <p class="profile-bio">一直猫，Dream Studio室长。简单介绍了自己，喜欢编程，热爱创作，对技术充满热情。</p>
+                
+                <div class="profile-status">
+                    <svg height="16" width="16" viewBox="0 0 16 16" version="1.1">
+                        <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+                    </svg>
+                    <span>Dreamirage</span>
+                </div>
+                
+                <div class="profile-status">
+                    <svg height="16" width="16" viewBox="0 0 16 16" version="1.1">
+                        <path d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.25-11.25A1.75 1.75 0
+                         1 0 6 6.75C6 8.32 7.17 9.5 8.75 9.5h.5a3.5 3.5 0 1 1 0 7h-.5A3.5 3.5 0 0 1 5.25 13"></path>
+                    </svg>
+                    <span>Dream Studio室长</span>
+                </div>
+                
+                <div class="profile-status">
+                    <svg height="16" width="16" viewBox="0 0 16 16" version="1.1">
+                        <path d="M11.536 3.464a5 5 0 0 1 0 7.072L8 14.07l-3.536-3.535a5 5 0 1 1 7.072-7.072v.001ZM8 9.54 9.954 7.587a2.5 2.5 0 1 0-3.962-3.036 2.5 2.5 0 0 0 .126 3.377L8 9.54Z"></path>
+                    </svg>
+                    <span>中国</span>
+                </div>
+                
+                <a href="mailto:dreamiragesa@outlook.com" class="btn">联系我</a>
+            </div>
+            
+            <!-- 主内容区 -->
+            <div class="profile-main">
+                <!-- 成就卡片 -->
+                <div class="achievements">
+                    <h3 class="section-title">成就与技能</h3>
+                    <div class="achievements-list">
+                        <span class="achievement-badge">
+                            <svg height="16" width="16" viewBox="0 0 16 16" version="1.1">
+                                <path d="M2 1.75C2 .784 2.784 0 3.75 0h8.5C13.216 0 14 .784 14 1.75v5a1.75 1.75 0 0 1-1.75 1.75h-8.5A1.75 1.75 0 0 1 2 6.75Zm1.75-.25a.25.25 0 0 0-.25.25v5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-5a.25.25 0 0 0-.25-.25Zm-2 9.5v3.25c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V11h-13Zm13 1.5v-1.25a.25.25 0 0 0-.25-.25h-13a.25.25 0 0 0-.25.25V11h13Z"></path>
+                            </svg>
+                            开发者
+                        </span>
+                        <span class="achievement-badge">
+                            <svg height="16" width="16" viewBox="0 0 16 16" version="1.1">
+                                <path d="M8 1a2 2 0 0 1 2 2c0 .791-.472 1.469-1.145 1.77L9.21 6.414l.672-1.926a4 4 0 1 1 2.7 4.874l-1.365 3.243a1.5 1.5 0 0 1-1.387.919H6.171a1.5 1.5 0 0 1-1.387-.919L3.417 9.87a4 4 0 1 1 2.7-4.575l.674 1.926.358-1.647A2.002 2.002 0 0 1 6 3a2 2 0 0 1 2-2Zm0 8a1 1 0 1 0 0 2 1 1 0 0 0 0-2ZM8 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2ZM9.5 3a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z"></path>
+                            </svg>
+                            设计师
+                        </span>
+                        <span class="achievement-badge">
+                            <svg height="16" width="16" viewBox="0 0 16 16" version="1.1">
+                                <path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09Z"></path>
+                            </svg>
+                            创作者
+                        </span>
+                        <span class="achievement-badge">
+                            <svg height="16" width="16" viewBox="0 0 16 16" version="1.1">
+                                <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"></path>
+                            </svg>
+                            明星贡献者
+                        </span>
+                        <span class="achievement-badge">JavaScript</span>
+                        <span class="achievement-badge">Python</span>
+                        <span class="achievement-badge">HTML/CSS</span>
+                        <span class="achievement-badge">Vue.js</span>
+                        <span class="achievement-badge">React</span>
+                    </div>
+                </div>
+                
+                <!-- 贡献信息 -->
+                <div class="contributions">
+                    <h3 class="section-title">贡献统计</h3>
+                    <div class="activity-chart">
+                        <p>2023年的 365 个贡献</p>
+                        <div class="activity-grid">
+                            <!-- 模拟一年的活动，随机生成不同级别的活动 -->
+                            <!-- 这里只是简化显示了部分格子，实际GitHub有365个 -->
+                            <div class="activity-day level-1"></div>
+                            <div class="activity-day level-2"></div>
+                            <div class="activity-day"></div>
+                            <div class="activity-day level-3"></div>
+                            <div class="activity-day"></div>
+                            <div class="activity-day level-1"></div>
+                            <div class="activity-day level-4"></div>
+                            <!-- 更多活动格子... -->
+                            <!-- 生成更多格子，实际应该循环生成 -->
+                            <div class="activity-day level-2"></div>
+                            <div class="activity-day level-3"></div>
+                            <div class="activity-day level-1"></div>
+                            <div class="activity-day"></div>
+                            <div class="activity-day level-4"></div>
+                            <!-- 替代无数重复格子，实际是365个格子 -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 项目/仓库列表 -->
+                <div class="repo-container">
+                    <div class="repo-header">
+                        <div class="repo-title">主要项目</div>
+                        <a href="items.html">查看全部</a>
+                    </div>
+                    
+                    <div class="repo-card">
+                        <a href="#" class="repo-name">Dreamirage Tool</a>
+                        <p class="repo-description">高超的，多用的，简洁的在线工具箱</p>
+                        <div class="repo-stats">
+                            <!-- Star and Fork counts removed -->
+                            <div class="repo-stats-item">JavaScript</div> <!-- Assuming JS is the language, adjust if needed -->
+                        </div>
+                    </div>
+                    
+                    <!-- Removed other repo cards -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div>© 2025 Dreamirage Studio. 保留所有权利。</div>
+        <div style="margin-top: 10px;">
+            <a href="../index.html">主页</a> · 
+            <a href="../我们.html">我们</a> · 
+            <a href="../作品.html">作品</a> · 
+            <a href="../服务.html">服务</a>
+        </div>
+    </footer>
+</body>
+</html>
